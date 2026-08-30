@@ -946,6 +946,31 @@ body.js-ready .workspace:not(.is-active) {
   width: 20px;
 }
 
+/* Inline Lucide sprite (symbols only — never rendered directly). */
+.lucide-sprite {
+  height: 0;
+  overflow: hidden;
+  position: absolute;
+  width: 0;
+}
+
+.glyph-icon {
+  flex: 0 0 auto;
+  height: 12px;
+  width: 12px;
+}
+
+.glyph-icon--lg {
+  height: 16px;
+  width: 16px;
+}
+
+.glyph-arrow {
+  display: block;
+  height: 13px;
+  width: 13px;
+}
+
 /* Brand logos (Brandfetch CDN) cover the glyph chip; the img removes itself
    on load error, revealing the letter glyph underneath as the fallback. */
 .brand-icon {
@@ -1330,6 +1355,11 @@ body.quattro-body .launcher-result:focus-visible {
   justify-content: center;
   position: relative;
   width: 20px;
+}
+
+.launcher-result__icon .glyph-icon {
+  height: 11px;
+  width: 11px;
 }
 
 .launcher-result__label,

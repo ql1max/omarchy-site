@@ -26,6 +26,24 @@ const THEMES = Object.freeze({
   nord: 'Nord'
 });
 
+// Symbol ids from the inline Lucide sprite in index.html.
+const WORKSPACE_ICONS = Object.freeze({
+  '1': 'lc-house',
+  '2': 'lc-monitor-play',
+  '3': 'lc-layout-grid',
+  '4': 'lc-keyboard'
+});
+
+function createLucideIcon(symbolId) {
+  const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+  svg.setAttribute('class', 'glyph-icon');
+  svg.setAttribute('aria-hidden', 'true');
+  const use = document.createElementNS('http://www.w3.org/2000/svg', 'use');
+  use.setAttribute('href', `#${symbolId}`);
+  svg.append(use);
+  return svg;
+}
+
 function isTypingTarget(target) {
   if (!(target instanceof Element)) return false;
   return Boolean(target.closest('input, textarea, select, [contenteditable="true"]'));
@@ -215,7 +233,7 @@ function initHomepage() {
       id: button.dataset.workspaceTarget,
       label: WORKSPACES[button.dataset.workspaceTarget]?.name || `Workspace ${button.dataset.workspaceTarget}`,
       description: `Switch to the ${WORKSPACES[button.dataset.workspaceTarget]?.name || 'workspace'} workspace`,
-      icon: button.dataset.workspaceTarget,
+      icon: WORKSPACE_ICONS[button.dataset.workspaceTarget] || button.dataset.workspaceTarget,
       target: ''
     }));
 
@@ -224,7 +242,7 @@ function initHomepage() {
       label: destination.dataset.launcherLabel,
       description: destination.dataset.launcherDescription || 'Open Omarchy destination',
       href: destination.getAttribute('href') || '#',
-      icon: (destination.dataset.launcherLabel || '?').slice(0, 2).toUpperCase(),
+      icon: destination.dataset.lucide || (destination.dataset.launcherLabel || '?').slice(0, 2).toUpperCase(),
       brand: destination.dataset.brandDomain || '',
       target: destination.getAttribute('target') || '',
       rel: destination.getAttribute('rel') || ''
@@ -301,7 +319,9 @@ function initHomepage() {
       const icon = document.createElement('span');
       icon.className = 'launcher-result__icon';
       icon.setAttribute('aria-hidden', 'true');
-      icon.textContent = item.icon;
+      icon.append(typeof item.icon === 'string' && item.icon.startsWith('lc-')
+        ? createLucideIcon(item.icon)
+        : document.createTextNode(item.icon));
       if (item.brand) attachBrandIcon(icon, item.brand);
 
       const copy = document.createElement('span');
@@ -317,7 +337,7 @@ function initHomepage() {
       const arrow = document.createElement('span');
       arrow.className = 'launcher-result__arrow';
       arrow.setAttribute('aria-hidden', 'true');
-      arrow.textContent = item.type === 'workspace' ? '→' : '↗';
+      arrow.append(createLucideIcon(item.type === 'workspace' ? 'lc-arrow-right' : 'lc-arrow-up-right'));
       result.append(icon, copy, arrow);
       result.addEventListener('mouseenter', () => setLauncherSelection(index, false));
       launcherResults.append(result);
