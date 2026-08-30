@@ -1,3 +1,5 @@
+import * as logo from './modules/logo.js';
+
 const WORKSPACES = Object.freeze({
   '1': { name: 'Welcome', slug: 'welcome' },
   '2': { name: 'Watch', slug: 'watch' },
@@ -451,6 +453,7 @@ function initHomepage() {
   });
 
   activateWorkspace(workspaceFromHash(window.location.hash), { announce: false });
+  logo.ready();
 }
 
 if (document.readyState === 'loading') {

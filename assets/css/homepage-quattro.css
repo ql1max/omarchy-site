@@ -1281,6 +1281,22 @@ body.quattro-body kbd {
 }
 
 /* -------------------------------------------------------------------------- */
+/* Animated Omarchy wordmark                                                   */
+/* -------------------------------------------------------------------------- */
+
+.pre.quattro-logo {
+  background: rgba(var(--rgb-background-night), 0.78);
+  border: 1px solid rgba(var(--rgb-terminal-white), 0.28);
+  margin: 0 0 var(--quattro-gap-outer);
+  overflow: hidden;
+  padding: var(--quattro-gap-outer);
+}
+
+.quattro-logo pre {
+  font-size: clamp(5.5px, 1vw, 14px);
+}
+
+/* -------------------------------------------------------------------------- */
 /* Readable type, release widget, and theme picker                            */
 /* -------------------------------------------------------------------------- */
 
