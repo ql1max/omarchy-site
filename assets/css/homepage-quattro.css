@@ -233,17 +233,17 @@ body.quattro-body input:focus-visible {
 .theme-button,
 .topbar-icon {
   align-items: center;
-  background: rgba(var(--rgb-terminal-white), 0.05);
-  border: 1px solid rgba(var(--rgb-terminal-white), 0.3);
+  background: transparent;
+  border: none;
   border-radius: 0;
   cursor: pointer;
   display: inline-flex;
   gap: var(--quattro-gap-inner);
-  height: 26px;
+  height: 100%;
   justify-content: center;
   line-height: 1;
-  min-width: 28px;
-  padding: 0 8px;
+  min-width: 34px;
+  padding: 0 12px;
   transition:
     background-color 140ms ease,
     border-color 140ms ease,
@@ -279,7 +279,11 @@ body.quattro-body input:focus-visible {
 .theme-button:focus-visible,
 .topbar-icon:hover,
 .topbar-icon:focus-visible {
-  background: rgba(var(--rgb-terminal-white), 0.08);
+  background: rgba(var(--rgb-terminal-white), 0.1);
+}
+
+.workspace-button.is-active {
+  background: rgba(var(--rgb-terminal-white), 0.16);
 }
 
 .dialog-close:hover,
@@ -1744,7 +1748,7 @@ body.quattro-body kbd {
   background: rgba(var(--rgb-background-night), 0.9);
   border: 1px solid rgba(var(--rgb-terminal-white), 0.28);
   margin: 0 0 var(--quattro-gap-outer);
-  padding: var(--quattro-gap-outer) var(--quattro-gap-outer) calc(var(--quattro-gap-outer) * 1.5);
+  padding: calc(var(--quattro-gap-outer) * 1.8) var(--quattro-gap-outer) calc(var(--quattro-gap-outer) * 2.2);
   text-align: center;
 }
 
@@ -1767,7 +1771,7 @@ body.quattro-body kbd {
   color: var(--color-terminal-white);
   font-size: clamp(14px, 1.5vw, 18px);
   line-height: 1.5;
-  margin: 0 auto var(--quattro-gap-outer);
+  margin: 0 auto calc(var(--quattro-gap-outer) * 1.6);
   max-width: 60ch;
   text-wrap: pretty;
 }
@@ -1776,12 +1780,12 @@ body.quattro-body kbd {
   align-items: center;
   display: flex;
   flex-wrap: wrap;
-  gap: var(--quattro-gap-inner);
+  gap: var(--quattro-gap-outer);
   justify-content: center;
 }
 
 .quattro-hero__actions .action {
-  font-size: 14px;
-  min-height: 38px;
-  padding: 8px 14px;
+  font-size: 15px;
+  min-height: 44px;
+  padding: 10px 20px;
 }
