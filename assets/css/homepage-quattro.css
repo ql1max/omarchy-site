@@ -1834,6 +1834,11 @@ body.quattro-body .launcher-result:focus-visible {
   text-wrap: pretty;
 }
 
+.quattro-hero__subtext a,
+.quattro-hero__subtext a:hover {
+  color: inherit;
+}
+
 .quattro-hero__actions {
   align-items: center;
   display: flex;
