@@ -1,3 +1,5 @@
+import * as logo from './modules/logo.js';
+
 const WORKSPACES = Object.freeze({
   '1': { name: 'Welcome', slug: 'welcome' },
   '2': { name: 'Watch', slug: 'watch' },
@@ -17,6 +19,7 @@ const HASH_TO_WORKSPACE = new Map([
 ]);
 
 const THEMES = Object.freeze({
+  omarchy: 'Omarchy',
   'tokyo-night': 'Tokyo Night',
   catppuccin: 'Catppuccin',
   gruvbox: 'Gruvbox',
@@ -98,7 +101,7 @@ function initHomepage() {
   const getOpenDialog = () => [launcher, themePicker, help].find((dialog) => dialog && dialog.open) || null;
 
   const applyTheme = (requestedTheme, { persist = true, announce = true } = {}) => {
-    const theme = THEMES[requestedTheme] ? requestedTheme : 'tokyo-night';
+    const theme = THEMES[requestedTheme] ? requestedTheme : 'omarchy';
     body.dataset.theme = theme;
     themeOptions.forEach((option) => {
       const active = option.dataset.themeValue === theme;
@@ -109,16 +112,16 @@ function initHomepage() {
     if (announce && announcer) announcer.textContent = `${THEMES[theme]} theme applied`;
     if (persist) {
       try {
-        window.localStorage.setItem('omarchy-homepage-theme', theme);
+        window.localStorage.setItem('omarchy-homepage-theme-v2', theme);
       } catch {
         // Storage can be unavailable in private or hardened browser contexts.
       }
     }
   };
 
-  let initialTheme = 'tokyo-night';
+  let initialTheme = 'omarchy';
   try {
-    initialTheme = window.localStorage.getItem('omarchy-homepage-theme') || initialTheme;
+    initialTheme = window.localStorage.getItem('omarchy-homepage-theme-v2') || initialTheme;
   } catch {
     // Keep the default when storage is unavailable.
   }
@@ -454,6 +457,7 @@ function initHomepage() {
   });
 
   activateWorkspace(workspaceFromHash(window.location.hash), { announce: false });
+  logo.ready();
 }
 
 if (document.readyState === 'loading') {

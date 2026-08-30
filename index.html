@@ -1,6 +1,7 @@
 <!doctype html>
 <html lang="en">
   <head>
+    <script>document.documentElement.classList.add('wte-home');</script>
     <title>Omarchy Quattro | Beautiful, Fun &amp; Opinionated Linux</title>
 
     <meta charset="utf-8">
@@ -25,6 +26,7 @@
     <link rel="stylesheet" href="/omarchy-site/assets/css/reset.css">
     <link rel="stylesheet" href="/omarchy-site/assets/css/root.css">
     <link rel="stylesheet" href="/omarchy-site/assets/css/fonts.css">
+    <link rel="stylesheet" href="/omarchy-site/assets/css/pre.css">
     <link rel="stylesheet" href="/omarchy-site/assets/css/homepage-quattro.css">
     <script type="module" src="/omarchy-site/assets/js/homepage-quattro.js"></script>
   </head>
@@ -67,7 +69,7 @@
         <div class="topbar__right">
           <button class="theme-button" type="button" data-action="open-themes" aria-haspopup="dialog" aria-controls="theme-picker" title="Change Omarchy theme">
             <span class="theme-button__swatch" aria-hidden="true"></span>
-            <span class="theme-button__label" data-theme-label>Tokyo Night</span>
+            <span class="theme-button__label" data-theme-label>Omarchy</span>
           </button>
           <button class="topbar-icon" type="button" data-action="open-help" aria-haspopup="dialog" aria-controls="keyboard-help" title="Keyboard shortcuts (?)">
             <span aria-hidden="true">?</span>
@@ -90,8 +92,21 @@
         <h1 class="sr-only">Omarchy Quattro desktop</h1>
 
         <section class="workspace workspace--welcome is-active" data-workspace-panel="1" aria-labelledby="workspace-1-title">
-          <div class="pre quattro-logo">
-            <img src="/omarchy-site/assets/images/omarchy-wordmark.svg" alt="Omarchy" width="4131" height="950" class="quattro-logo__mark" decoding="async">
+          <div class="pre quattro-logo" aria-label="Omarchy">
+            <span class="quattro-logo__animation">
+<pre aria-hidden="true">
+                 ▄▄▄
+ ▄█████▄    ▄███████████▄    ▄███████   ▄███████   ▄███████   ▄█   █▄    ▄█   █▄
+███   ███  ███   ███   ███  ███   ███  ███   ███  ███   ███  ███   ███  ███   ███
+███   ███  ███   ███   ███  ███   ███  ███   ███  ███   █▀   ███   ███  ███   ███
+███   ███  ███   ███   ███ ▄███▄▄▄███ ▄███▄▄▄██▀  ███       ▄███▄▄▄███▄ ███▄▄▄███
+███   ███  ███   ███   ███ ▀███▀▀▀███ ▀███▀▀▀▀    ███      ▀▀███▀▀▀███  ▀▀▀▀▀▀███
+███   ███  ███   ███   ███  ███   ███ ██████████  ███   █▄   ███   ███  ▄██   ███
+███   ███  ███   ███   ███  ███   ███  ███   ███  ███   ███  ███   ███  ███   ███
+ ▀█████▀    ▀█   ███   █▀   ███   █▀   ███   ███  ███████▀   ███   █▀    ▀█████▀
+                                       ███   █▀
+</pre>
+            </span>
           </div>
           <div class="quattro-hero">
             <h2 class="quattro-hero__title">Beautiful, Fun &amp; Opinionated Linux by <a href="https://dhh.dk">DHH</a></h2>
@@ -99,7 +114,7 @@
             <div class="quattro-hero__actions">
               <a class="action action--primary" href="https://omarchy.org/manual/">Read the Manual <span aria-hidden="true">↗</span></a>
               <a class="action" href="https://iso.omarchy.org/omarchy-4.0.1.iso">Download ISO <span aria-hidden="true">↓</span></a>
-              <a class="action action--demo" href="/omarchy-site/live/" aria-label="Open the interactive Omarchy desktop demo">Feel Omarchy <span aria-hidden="true">▶</span></a>
+              <a class="action action--demo" href="/omarchy-site/live/" aria-label="Open the interactive Omarchy desktop demo">Try the Desktop <span aria-hidden="true">▶</span></a>
             </div>
           </div>
           <h2 class="workspace__heading" id="workspace-1-title" tabindex="-1"><span>01</span> Welcome desk <small>first run</small></h2>
@@ -222,8 +237,8 @@
                   <a class="destination" href="https://omarchy.org/manual/" data-launcher-label="Manual" data-launcher-description="Read the Omarchy manual">
                     <span class="destination__icon" aria-hidden="true">M</span><span><strong>Manual</strong><small>learn the system</small></span><span class="destination__arrow" aria-hidden="true">↗</span>
                   </a>
-                  <a class="destination" href="/omarchy-site/live/" data-launcher-label="Feel Omarchy" data-launcher-description="Open the interactive desktop demo">
-                    <span class="destination__icon" aria-hidden="true">▶</span><span><strong>Feel Omarchy</strong><small>interactive desktop</small></span><span class="destination__arrow" aria-hidden="true">↗</span>
+                  <a class="destination" href="/omarchy-site/live/" data-launcher-label="Desktop Demo" data-launcher-description="Open the interactive desktop demo">
+                    <span class="destination__icon" aria-hidden="true">▶</span><span><strong>Desktop Demo</strong><small>interactive preview</small></span><span class="destination__arrow" aria-hidden="true">↗</span>
                   </a>
                   <a class="destination" href="https://iso.omarchy.org/omarchy-4.0.1.iso" data-launcher-label="ISO" data-launcher-description="Download Omarchy 4.0.1">
                     <span class="destination__icon" aria-hidden="true">↓</span><span><strong>ISO</strong><small>omarchy 4.0.1</small></span><span class="destination__arrow" aria-hidden="true">↗</span>
@@ -381,9 +396,13 @@
         </div>
         <p class="theme-dialog__intro">These themes and wallpapers ship with Omarchy. Choose one for this page.</p>
         <div class="theme-grid" role="group" aria-label="Desktop theme">
-          <button class="theme-option is-active" type="button" data-theme-value="tokyo-night" aria-pressed="true">
+          <button class="theme-option is-active" type="button" data-theme-value="omarchy" aria-pressed="true">
+            <span class="theme-option__preview theme-option__preview--omarchy" aria-hidden="true"></span>
+            <span><strong>Omarchy</strong><small>No wallpaper</small></span>
+          </button>
+          <button class="theme-option" type="button" data-theme-value="tokyo-night" aria-pressed="false">
             <span class="theme-option__preview theme-option__preview--tokyo-night" aria-hidden="true"></span>
-            <span><strong>Tokyo Night</strong><small>Quattro default</small></span>
+            <span><strong>Tokyo Night</strong><small>Quattro wallpaper</small></span>
           </button>
           <button class="theme-option" type="button" data-theme-value="catppuccin" aria-pressed="false">
             <span class="theme-option__preview theme-option__preview--catppuccin" aria-hidden="true"></span>

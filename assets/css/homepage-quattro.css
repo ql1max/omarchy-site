@@ -46,7 +46,7 @@ body.quattro-body::before {
       var(--quattro-scrim-top, rgba(var(--rgb-background-night), 0.47)),
       var(--quattro-scrim-bottom, rgba(var(--rgb-background-night), 0.62))
     ),
-    var(--quattro-wallpaper, url('/omarchy-site/assets/images/quattro-wallpaper.webp'));
+    var(--quattro-wallpaper, none);
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
@@ -55,6 +55,12 @@ body.quattro-body::before {
   pointer-events: none;
   position: fixed;
   z-index: -1;
+}
+
+body.quattro-body[data-theme='tokyo-night'] {
+  --quattro-wallpaper: url('/omarchy-site/assets/images/quattro-wallpaper.webp');
+  --quattro-scrim-top: rgba(var(--rgb-background-night), 0.47);
+  --quattro-scrim-bottom: rgba(var(--rgb-background-night), 0.62);
 }
 
 body.quattro-body[data-theme='catppuccin'] {
@@ -742,16 +748,6 @@ body.js-ready .workspace:not(.is-active) {
   color: var(--color-background-night) !important;
 }
 
-.action--demo {
-  background: rgba(var(--rgb-green), 0.14);
-  border-color: rgba(var(--rgb-green), 0.78);
-}
-
-.action--demo:hover,
-.action--demo:focus-visible {
-  background: rgba(var(--rgb-green), 0.24);
-  border-color: var(--color-green);
-}
 
 .terminal-window__footer {
   align-items: center;
@@ -1359,7 +1355,7 @@ body.quattro-body kbd {
 }
 
 /* -------------------------------------------------------------------------- */
-/* Omarchy wordmark (official brand asset)                                     */
+/* Animated Omarchy wordmark                                                  */
 /* -------------------------------------------------------------------------- */
 
 .pre.quattro-logo {
@@ -1370,13 +1366,16 @@ body.quattro-body kbd {
   padding: var(--quattro-gap-outer);
 }
 
-.quattro-logo__mark {
+.quattro-logo__animation {
   display: block;
-  filter: drop-shadow(0 1px 8px rgba(var(--rgb-black), 0.35));
-  height: auto;
   margin-inline: auto;
   max-width: 100%;
-  width: clamp(220px, 40vw, 500px);
+  position: relative;
+  width: max-content;
+}
+
+.quattro-logo pre {
+  filter: drop-shadow(0 1px 8px rgba(var(--rgb-black), 0.35));
 }
 
 /* -------------------------------------------------------------------------- */
@@ -1561,6 +1560,10 @@ body.quattro-body kbd {
   border: 1px solid rgba(var(--rgb-terminal-white), 0.3);
   display: block;
   height: 100px;
+}
+
+.theme-option__preview--omarchy {
+  background: linear-gradient(135deg, var(--color-background-storm), var(--color-background-night));
 }
 
 .theme-option__preview--tokyo-night {
@@ -1952,7 +1955,7 @@ body.quattro-body kbd {
 
   .quattro-hero__actions {
     display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-columns: minmax(0, 1fr);
   }
 
   .quattro-hero__actions .action {
@@ -1960,8 +1963,8 @@ body.quattro-body kbd {
     width: 100%;
   }
 
-  .quattro-hero__actions .action:first-child {
-    grid-column: 1 / -1;
+  .quattro-hero__actions .action--demo {
+    display: none;
   }
 
   .shortcut-cards li {

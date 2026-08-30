@@ -17,9 +17,7 @@ function updateClock() {
   const clock = document.querySelector('[data-live-clock]');
   if (!clock) return;
   const now = new Date();
-  const weekday = now.toLocaleDateString([], { weekday: 'long' });
-  const time = now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', hour12: false });
-  clock.textContent = `${weekday} ${time}`;
+  clock.textContent = now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', hour12: false });
   clock.dateTime = now.toISOString();
 }
 
@@ -65,7 +63,6 @@ function switchSpace(id) {
   closeLauncher();
   const selected = spaceWindows(next).find((item) => item.classList.contains('is-focused')) || spaceWindows(next)[0];
   if (selected) focusWindow(selected);
-  if (selected?.dataset.liveApp === 'terminal') window.setTimeout(() => commandInput?.focus(), 0);
 }
 
 function openApp(appName) {
@@ -81,24 +78,23 @@ function openApp(appName) {
   tileWorkspace(space);
   focusWindow(windowElement);
   closeLauncher();
-  if (appName === 'terminal') window.setTimeout(() => commandInput?.focus(), 0);
 }
 
-function closeWindow(windowElement) {
-  if (!windowElement) return;
-  const space = windowElement.closest('[data-live-space]');
-  windowElement.hidden = true;
-  windowElement.classList.remove('is-focused', 'is-floating', 'is-fullscreen');
-  windowElement.removeAttribute('style');
-  tileWorkspace(space);
-  const next = spaceWindows(space)[0];
-  if (next) focusWindow(next);
+
+function showMenuView(name) {
+  launcher?.querySelectorAll('[data-live-menu-view]').forEach((view) => {
+    view.hidden = view.dataset.liveMenuView !== name;
+    view.querySelectorAll(':scope > button, :scope > a').forEach((item) => { item.hidden = false; });
+  });
+  const search = launcher?.querySelector('[data-live-menu-search]');
+  if (search) search.value = '';
 }
 
 function openLauncher() {
   if (!launcher) return;
+  showMenuView('root');
   launcher.hidden = false;
-  launcher.querySelector('button, a')?.focus();
+  launcher.querySelector('[data-live-menu-search]')?.focus();
 }
 
 function closeLauncher() {
@@ -227,7 +223,6 @@ function runCommand(rawCommand) {
 function initWindows() {
   document.querySelectorAll('[data-live-window]').forEach((windowElement) => {
     windowElement.addEventListener('pointerdown', () => focusWindow(windowElement));
-    windowElement.querySelector('[data-live-close]')?.addEventListener('click', () => closeWindow(windowElement));
     const handle = windowElement.querySelector('[data-live-drag-handle]');
     if (!handle) return;
     handle.addEventListener('pointerdown', (event) => {
@@ -258,6 +253,12 @@ function initWindows() {
 
 document.querySelectorAll('[data-live-workspace]').forEach((button) => button.addEventListener('click', () => switchSpace(button.dataset.liveWorkspace)));
 document.querySelectorAll('[data-live-open-app]').forEach((button) => button.addEventListener('click', () => openApp(button.dataset.liveOpenApp)));
+document.querySelectorAll('[data-live-menu-target]').forEach((button) => button.addEventListener('click', () => showMenuView(button.dataset.liveMenuTarget)));
+document.querySelector('[data-live-menu-search]')?.addEventListener('input', (event) => {
+  const query = event.currentTarget.value.trim().toLowerCase();
+  const view = launcher?.querySelector('[data-live-menu-view]:not([hidden])');
+  view?.querySelectorAll(':scope > button, :scope > a').forEach((item) => { item.hidden = Boolean(query) && !item.textContent.toLowerCase().includes(query); });
+});
 document.querySelectorAll('[data-live-action]').forEach((button) => {
   button.addEventListener('click', () => {
     const action = button.dataset.liveAction;
@@ -278,19 +279,16 @@ document.querySelector('[data-live-terminal-form]')?.addEventListener('submit', 
 });
 
 document.addEventListener('keydown', (event) => {
-  const typing = event.target instanceof Element && Boolean(event.target.closest('input, textarea, [contenteditable="true"]'));
+  const target = event.target instanceof Element ? event.target : null;
+  const typing = Boolean(target?.closest('input, textarea, [contenteditable="true"]'));
+  const overlayControl = Boolean(target?.closest('button, a') && ((!launcher?.hidden) || (!bindingsPanel?.hidden)));
   const key = event.key.toLowerCase();
   if (event.key === 'Escape') {
     closeLauncher();
     if (bindingsPanel) bindingsPanel.hidden = true;
     return;
   }
-  if ((event.ctrlKey || event.metaKey) && key === 'k' && !event.metaKey) {
-    event.preventDefault();
-    launcher?.hidden ? openLauncher() : closeLauncher();
-    return;
-  }
-  if (!event.metaKey || typing) return;
+  if (typing || overlayControl || event.ctrlKey || event.altKey || event.metaKey) return;
   if (event.code === 'Space') {
     event.preventDefault();
     launcher?.hidden ? openLauncher() : closeLauncher();
@@ -309,16 +307,18 @@ document.addEventListener('keydown', (event) => {
   }
   if (key === 'j') { event.preventDefault(); toggleSplit(); return; }
   if (key === 't') { event.preventDefault(); toggleFloating(); return; }
-  if (key === 'f' && event.shiftKey) { event.preventDefault(); openApp('files'); return; }
   if (key === 'f') { event.preventDefault(); toggleFullscreen(); return; }
   if (key === 'k') { event.preventDefault(); toggleBindings(); return; }
-  if (event.key === 'Enter' && event.shiftKey) { event.preventDefault(); openApp('browser'); return; }
+  if (key === 'b') { event.preventDefault(); openApp('browser'); return; }
+  if (key === 'e') { event.preventDefault(); openApp('files'); return; }
   if (event.key === 'Enter') { event.preventDefault(); openApp('terminal'); }
 });
 
 updateClock();
 window.setInterval(updateClock, 10000);
 initWindows();
+openApp('browser');
+openApp('files');
 tileAllWorkspaces();
 switchSpace('1');
-window.setTimeout(() => commandInput?.focus(), 0);
+focusWindow(document.querySelector('[data-live-app="terminal"]'));
