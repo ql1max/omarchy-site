@@ -1363,6 +1363,9 @@ body.quattro-body .launcher-result:focus-visible {
 .pre.quattro-logo {
   background: rgba(var(--rgb-background-night), 0.88);
   border: 0;
+  color: inherit;
+  display: block;
+  text-decoration: none;
   margin: 0 0 12px;
   overflow: hidden;
   padding: var(--quattro-gap-outer);
