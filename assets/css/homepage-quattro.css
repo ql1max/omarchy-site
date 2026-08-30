@@ -1225,6 +1225,14 @@ body.quattro-body kbd {
   padding: 0;
 }
 
+/* The .search-field container carries the focus indicator via :focus-within,
+   so suppress the input's own outline. Needs to out-specify the global
+   body.quattro-body input:focus-visible outline rule above. */
+body.quattro-body .search-field input:focus-visible,
+body.quattro-body .search-field input:focus {
+  outline: none;
+}
+
 .search-field input::placeholder {
   color: rgba(var(--rgb-terminal-white), 0.62);
 }
@@ -1283,6 +1291,14 @@ body.quattro-body kbd {
 .launcher-result[aria-selected='true'] {
   background: var(--quattro-fill-selected);
   color: var(--color-white) !important;
+}
+
+/* The global outline-offset pushes the ring outside each row, where the
+   results frame (overflow: auto) clips it on the first and last rows.
+   Draw the ring inside the row instead. Same specificity as the global
+   input/button/link rule, but later in the file so it wins. */
+body.quattro-body .launcher-result:focus-visible {
+  outline-offset: -2px;
 }
 
 .launcher-result__icon {
