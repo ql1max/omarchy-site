@@ -16,6 +16,13 @@ const HASH_TO_WORKSPACE = new Map([
   ['shortcuts', '4']
 ]);
 
+const THEMES = Object.freeze({
+  'tokyo-night': 'Tokyo Night',
+  catppuccin: 'Catppuccin',
+  gruvbox: 'Gruvbox',
+  nord: 'Nord'
+});
+
 function isTypingTarget(target) {
   if (!(target instanceof Element)) return false;
   return Boolean(target.closest('input, textarea, select, [contenteditable="true"]'));
@@ -74,6 +81,9 @@ function initHomepage() {
   const announcer = document.querySelector('[data-workspace-announcer]');
   const launcher = document.querySelector('#command-launcher');
   const help = document.querySelector('#keyboard-help');
+  const themePicker = document.querySelector('#theme-picker');
+  const themeOptions = Array.from(document.querySelectorAll('[data-theme-value]'));
+  const themeLabel = document.querySelector('[data-theme-label]');
   const launcherInput = document.querySelector('#launcher-search');
   const launcherResults = document.querySelector('#launcher-results');
   const launcherEmpty = document.querySelector('[data-launcher-empty]');
@@ -85,7 +95,34 @@ function initHomepage() {
     selectedLauncherIndex: 0
   };
 
-  const getOpenDialog = () => [launcher, help].find((dialog) => dialog && dialog.open) || null;
+  const getOpenDialog = () => [launcher, themePicker, help].find((dialog) => dialog && dialog.open) || null;
+
+  const applyTheme = (requestedTheme, { persist = true, announce = true } = {}) => {
+    const theme = THEMES[requestedTheme] ? requestedTheme : 'tokyo-night';
+    body.dataset.theme = theme;
+    themeOptions.forEach((option) => {
+      const active = option.dataset.themeValue === theme;
+      option.classList.toggle('is-active', active);
+      option.setAttribute('aria-pressed', String(active));
+    });
+    if (themeLabel) themeLabel.textContent = THEMES[theme];
+    if (announce && announcer) announcer.textContent = `${THEMES[theme]} theme applied`;
+    if (persist) {
+      try {
+        window.localStorage.setItem('omarchy-homepage-theme', theme);
+      } catch {
+        // Storage can be unavailable in private or hardened browser contexts.
+      }
+    }
+  };
+
+  let initialTheme = 'tokyo-night';
+  try {
+    initialTheme = window.localStorage.getItem('omarchy-homepage-theme') || initialTheme;
+  } catch {
+    // Keep the default when storage is unavailable.
+  }
+  applyTheme(initialTheme, { persist: false, announce: false });
 
   const focusRestoredElement = () => {
     const element = state.restoreFocus;
@@ -287,6 +324,9 @@ function initHomepage() {
         renderLauncher('');
         window.setTimeout(() => launcherInput.focus(), 0);
       }
+    } else if (dialog === themePicker) {
+      const selectedTheme = dialog.querySelector('[data-theme-value][aria-pressed="true"]');
+      window.setTimeout(() => selectedTheme?.focus(), 0);
     } else {
       const closeButton = dialog.querySelector('.dialog-close');
       window.setTimeout(() => closeButton?.focus(), 0);
@@ -300,6 +340,9 @@ function initHomepage() {
         break;
       case 'open-help':
         openDialog(help);
+        break;
+      case 'open-themes':
+        openDialog(themePicker);
         break;
       case 'close-overlays':
         closeOverlays();
@@ -321,12 +364,16 @@ function initHomepage() {
     });
   });
 
+  themeOptions.forEach((option) => {
+    option.addEventListener('click', () => applyTheme(option.dataset.themeValue));
+  });
+
   document.addEventListener('click', (event) => {
     const action = event.target instanceof Element ? event.target.closest('[data-action]') : null;
     if (action) handleAction(action);
   });
 
-  [launcher, help].forEach((dialog) => {
+  [launcher, themePicker, help].forEach((dialog) => {
     if (!dialog) return;
     dialog.addEventListener('cancel', (event) => {
       event.preventDefault();
