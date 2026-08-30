@@ -31,6 +31,27 @@ function isTypingTarget(target) {
   return Boolean(target.closest('input, textarea, select, [contenteditable="true"]'));
 }
 
+// Layer a real brand logo (Brandfetch CDN) over the glyph chip. The glyph
+// stays visible underneath, and the img removes itself on error, so a
+// blocked CDN or unknown brand degrades to the letter icon automatically.
+function attachBrandIcon(host, domain) {
+  if (!host || !domain) return;
+  const img = document.createElement('img');
+  img.className = 'brand-icon';
+  img.alt = '';
+  img.loading = 'lazy';
+  img.decoding = 'async';
+  img.addEventListener('error', () => img.remove());
+  img.src = `https://cdn.brandfetch.com/${domain}`;
+  host.append(img);
+}
+
+function initBrandIcons() {
+  document.querySelectorAll('.destination[data-brand-domain]').forEach((destination) => {
+    attachBrandIcon(destination.querySelector('.destination__icon'), destination.dataset.brandDomain);
+  });
+}
+
 function workspaceFromHash(hash) {
   const value = hash.replace(/^#/, '').toLowerCase();
   return HASH_TO_WORKSPACE.get(value) || '1';
@@ -78,6 +99,7 @@ function initHomepage() {
 
   initClock();
   initVideoFacades();
+  initBrandIcons();
 
   const workspaceButtons = Array.from(document.querySelectorAll('[data-workspace-target].workspace-button'));
   const workspacePanels = Array.from(document.querySelectorAll('[data-workspace-panel]'));
@@ -203,6 +225,7 @@ function initHomepage() {
       description: destination.dataset.launcherDescription || 'Open Omarchy destination',
       href: destination.getAttribute('href') || '#',
       icon: (destination.dataset.launcherLabel || '?').slice(0, 2).toUpperCase(),
+      brand: destination.dataset.brandDomain || '',
       target: destination.getAttribute('target') || '',
       rel: destination.getAttribute('rel') || ''
     }));
@@ -279,6 +302,7 @@ function initHomepage() {
       icon.className = 'launcher-result__icon';
       icon.setAttribute('aria-hidden', 'true');
       icon.textContent = item.icon;
+      if (item.brand) attachBrandIcon(icon, item.brand);
 
       const copy = document.createElement('span');
       copy.className = 'launcher-result__copy';

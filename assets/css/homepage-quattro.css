@@ -942,7 +942,26 @@ body.js-ready .workspace:not(.is-active) {
   font-weight: 700;
   height: 20px;
   justify-content: center;
+  position: relative;
   width: 20px;
+}
+
+/* Brand logos (Brandfetch CDN) cover the glyph chip; the img removes itself
+   on load error, revealing the letter glyph underneath as the fallback. */
+.brand-icon {
+  background: rgba(var(--rgb-terminal-white), 0.96);
+  border-radius: 2px;
+  height: calc(100% - 4px);
+  inset: 2px;
+  object-fit: contain;
+  padding: 1px;
+  position: absolute;
+  width: calc(100% - 4px);
+}
+
+.destination__icon .brand-icon,
+.launcher-result__icon .brand-icon {
+  box-shadow: 0 0 0 1px rgba(var(--rgb-terminal-white), 0.25);
 }
 
 .destination strong,
@@ -1309,6 +1328,7 @@ body.quattro-body .launcher-result:focus-visible {
   font-size: 11px;
   height: 20px;
   justify-content: center;
+  position: relative;
   width: 20px;
 }
 
