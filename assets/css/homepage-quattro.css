@@ -21,7 +21,8 @@ html {
 }
 
 body.quattro-body {
-  background-color: var(--color-background-night);
+  /* The fixed ::before layer paints the wallpaper and base color; body must
+     stay transparent or its own background covers the layer entirely. */
   color: var(--color-terminal-white);
   display: block;
   font-family: 'JetBrains Mono', monospace;
@@ -1559,8 +1560,14 @@ body.quattro-body kbd {
 
 @media (max-width: 760px) {
   body.quattro-body {
-    background-attachment: scroll;
     font-size: 14px;
+  }
+
+  /* On small screens let the wallpaper scroll naturally instead of being
+     pinned by the fixed layer, which wastes compositor memory on phones. */
+  body.quattro-body::before {
+    position: absolute;
+    height: 100%;
   }
 
   .quattro-shell {
