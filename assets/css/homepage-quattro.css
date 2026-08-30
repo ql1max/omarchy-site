@@ -370,13 +370,6 @@ body.quattro-body input:focus-visible {
   width: 16px;
 }
 
-.topbar__shortcut {
-  color: var(--color-terminal-blue);
-  font-size: 10px;
-  font-weight: 400;
-  letter-spacing: 0.04em;
-}
-
 .workspace-switcher {
   overflow-x: auto;
   scrollbar-width: none;
@@ -553,8 +546,7 @@ body.js-ready .workspace:not(.is-active) {
   grid-template-columns: repeat(12, minmax(0, 1fr));
 }
 
-.workspace__tiles--watch,
-.workspace__tiles--shortcuts {
+.workspace__tiles--watch {
   grid-template-columns: repeat(2, minmax(0, 1fr));
 }
 
@@ -693,7 +685,6 @@ body.js-ready .workspace:not(.is-active) {
 }
 
 .action-row,
-.cheatsheet__actions,
 .dialog-actions {
   align-items: center;
   display: flex;
@@ -703,7 +694,6 @@ body.js-ready .workspace:not(.is-active) {
 
 .action,
 .text-button,
-.shortcut-cards button,
 .help-list button {
   align-items: center;
   background: rgba(var(--rgb-terminal-white), 0.08);
@@ -730,8 +720,6 @@ body.js-ready .workspace:not(.is-active) {
 .action:focus-visible,
 .text-button:hover,
 .text-button:focus-visible,
-.shortcut-cards button:hover,
-.shortcut-cards button:focus-visible,
 .help-list button:hover,
 .help-list button:focus-visible {
   background: var(--quattro-fill-hover);
@@ -1057,21 +1045,12 @@ body.quattro-body kbd {
   margin-top: var(--quattro-gap-inner);
 }
 
-/* Shortcut workspace */
-.shortcut-guide__intro {
-  color: var(--color-terminal-white);
-  font-size: 12px;
-  line-height: 1.5;
-  max-width: 58ch;
-}
-
-.shortcut-cards,
+/* Keyboard help dialog */
 .help-list {
   display: grid;
   gap: var(--quattro-gap-inner);
 }
 
-.shortcut-cards li,
 .help-list li {
   align-items: center;
   background: var(--quattro-fill-idle);
@@ -1083,7 +1062,6 @@ body.quattro-body kbd {
   padding: var(--quattro-gap-inner);
 }
 
-.shortcut-cards li > kbd,
 .help-list__keys {
   align-items: center;
   display: inline-flex;
@@ -1091,58 +1069,21 @@ body.quattro-body kbd {
   justify-content: center;
 }
 
-.shortcut-cards li > kbd {
-  color: var(--color-green);
-  font-size: 12px;
-}
-
-.shortcut-cards strong,
-.shortcut-cards small,
 .help-list strong,
 .help-list small {
   display: block;
 }
 
-.shortcut-cards strong,
 .help-list strong {
   color: var(--color-terminal-cyan);
   font-size: 11px;
 }
 
-.shortcut-cards small,
 .help-list small {
   color: var(--color-terminal-white);
   font-size: 12px;
   line-height: 1.35;
   margin-top: 2px;
-}
-
-.cheatsheet {
-  justify-content: space-between;
-}
-
-.binding-list {
-  display: grid;
-  gap: var(--quattro-gap-inner);
-}
-
-.binding-list > div {
-  align-items: center;
-  border-bottom: 1px solid rgba(var(--rgb-terminal-white), 0.18);
-  display: grid;
-  gap: var(--quattro-gap-inner);
-  grid-template-columns: 90px minmax(0, 1fr);
-  padding-bottom: var(--quattro-gap-inner);
-}
-
-.binding-list dt {
-  margin: 0;
-}
-
-.binding-list dd {
-  color: var(--color-terminal-white);
-  font-size: 11px;
-  margin: 0;
 }
 
 /* -------------------------------------------------------------------------- */
@@ -1474,9 +1415,7 @@ body.quattro-body .launcher-result:focus-visible {
 
 .destination strong,
 .launcher-result__label,
-.shortcut-cards strong,
-.help-list strong,
-.binding-list dd {
+.help-list strong {
   font-size: 13px;
 }
 
@@ -1485,8 +1424,7 @@ body.quattro-body .launcher-result:focus-visible {
   font-size: 12px;
 }
 
-.launcher-preview__body > p:not(.eyebrow):not(.launcher-preview__key),
-.shortcut-guide__intro {
+.launcher-preview__body > p:not(.eyebrow):not(.launcher-preview__key) {
   font-size: 14px;
 }
 
@@ -1664,7 +1602,6 @@ body.quattro-body .launcher-result:focus-visible {
 /* -------------------------------------------------------------------------- */
 
 @media (max-width: 1040px) {
-  .topbar__shortcut,
   .theme-button__label,
   .workspace-button__name {
     display: none;
@@ -1767,8 +1704,7 @@ body.quattro-body .launcher-result:focus-visible {
 
   .workspace__tiles--welcome,
   .workspace__tiles--watch,
-  .workspace__tiles--explore,
-  .workspace__tiles--shortcuts {
+  .workspace__tiles--explore {
     grid-template-columns: minmax(0, 1fr);
   }
 
@@ -1814,12 +1750,10 @@ body.quattro-body .launcher-result:focus-visible {
     white-space: normal;
   }
 
-  .shortcut-cards li,
   .help-list li {
     grid-template-columns: 28px minmax(0, 1fr);
   }
 
-  .shortcut-cards button,
   .help-list button {
     grid-column: 2;
     justify-self: start;
@@ -1833,7 +1767,6 @@ body.quattro-body .launcher-result:focus-visible {
   .topbar-icon,
   .action,
   .text-button,
-  .shortcut-cards button,
   .help-list button,
   .dialog-close,
   .search-field,
@@ -1862,7 +1795,6 @@ body.quattro-body .launcher-result:focus-visible {
   .dialog-close,
   .action,
   .text-button,
-  .shortcut-cards button,
   .help-list button,
   .destination,
   .video-facade img,
@@ -2025,14 +1957,6 @@ body.quattro-body .launcher-result:focus-visible {
 
   .quattro-hero__actions .action--demo {
     display: none;
-  }
-
-  .shortcut-cards li {
-    grid-template-columns: 28px minmax(0, 1fr) auto;
-  }
-
-  .shortcut-cards button {
-    grid-column: auto;
   }
 
   .dialog-hint {

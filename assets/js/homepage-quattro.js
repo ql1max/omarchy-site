@@ -3,19 +3,16 @@ import * as logo from './modules/logo.js';
 const WORKSPACES = Object.freeze({
   '1': { name: 'Welcome', slug: 'welcome' },
   '2': { name: 'Watch', slug: 'watch' },
-  '3': { name: 'Explore', slug: 'explore' },
-  '4': { name: 'Shortcuts', slug: 'shortcuts' }
+  '3': { name: 'Explore', slug: 'explore' }
 });
 
 const HASH_TO_WORKSPACE = new Map([
   ['workspace-1', '1'],
   ['workspace-2', '2'],
   ['workspace-3', '3'],
-  ['workspace-4', '4'],
   ['welcome', '1'],
   ['watch', '2'],
-  ['explore', '3'],
-  ['shortcuts', '4']
+  ['explore', '3']
 ]);
 
 const THEMES = Object.freeze({
@@ -30,8 +27,7 @@ const THEMES = Object.freeze({
 const WORKSPACE_ICONS = Object.freeze({
   '1': 'lc-house',
   '2': 'lc-monitor-play',
-  '3': 'lc-layout-grid',
-  '4': 'lc-keyboard'
+  '3': 'lc-layout-grid'
 });
 
 function createLucideIcon(symbolId) {

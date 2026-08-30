@@ -130,10 +130,6 @@
               <span class="workspace-button__number">3</span>
               <span class="workspace-button__name">Explore</span>
             </button>
-            <button class="workspace-button" type="button" data-workspace-target="4" aria-current="false" title="Workspace 4: Shortcuts">
-              <span class="workspace-button__number">4</span>
-              <span class="workspace-button__name">Shortcuts</span>
-            </button>
           </nav>
         </div>
 
@@ -372,49 +368,6 @@
             </article>
           </div>
         </section>
-
-        <section class="workspace workspace--shortcuts" data-workspace-panel="4" aria-labelledby="workspace-4-title">
-          <h2 class="workspace__heading" id="workspace-4-title" tabindex="-1"><span>04</span> Shortcuts <small>keyboard controls</small></h2>
-          <div class="workspace__tiles workspace__tiles--shortcuts">
-            <article class="window window--guide">
-              <div class="window__titlebar">
-                <span class="window__traffic" aria-hidden="true"><i></i><i></i><i></i></span>
-                <h3>help / keyboard-navigation</h3>
-                <span class="window__meta">quick reference</span>
-              </div>
-              <div class="window__body shortcut-guide">
-                <p class="shortcut-guide__intro">Use the panel, number keys, or buttons to switch workspaces.</p>
-                <ul class="shortcut-cards">
-                  <li><kbd>1</kbd><span><strong>Welcome</strong><small>introduction and current release</small></span><button type="button" data-action="switch-workspace" data-workspace-target="1">Open</button></li>
-                  <li><kbd>2</kbd><span><strong>Watch</strong><small>both Omarchy videos</small></span><button type="button" data-action="switch-workspace" data-workspace-target="2">Open</button></li>
-                  <li><kbd>3</kbd><span><strong>Explore</strong><small>every destination in one explorer</small></span><button type="button" data-action="switch-workspace" data-workspace-target="3">Open</button></li>
-                  <li><kbd>4</kbd><span><strong>Shortcuts</strong><small>keyboard reference</small></span><button type="button" data-action="switch-workspace" data-workspace-target="4">Open</button></li>
-                </ul>
-              </div>
-            </article>
-
-            <article class="window window--cheatsheet">
-              <div class="window__titlebar">
-                <span class="window__traffic" aria-hidden="true"><i></i><i></i><i></i></span>
-                <h3>bindings / essentials</h3>
-                <span class="window__meta">omarchy.conf</span>
-              </div>
-              <div class="window__body cheatsheet">
-                <dl class="binding-list">
-                  <div><dt><kbd>Ctrl K</kbd></dt><dd>Open command launcher</dd></div>
-                  <div><dt><kbd>?</kbd></dt><dd>Open keyboard help</dd></div>
-                  <div><dt><kbd>Esc</kbd></dt><dd>Close any open overlay</dd></div>
-                  <div><dt><kbd>↑</kbd> <kbd>↓</kbd></dt><dd>Move through search results</dd></div>
-                  <div><dt><kbd>Enter</kbd></dt><dd>Activate the selected result</dd></div>
-                </dl>
-                <div class="cheatsheet__actions">
-                  <button class="action action--primary" type="button" data-action="open-launcher">Try the launcher <span aria-hidden="true">→</span></button>
-                  <button class="text-button" type="button" data-action="open-help">Open full help <span aria-hidden="true">→</span></button>
-                </div>
-              </div>
-            </article>
-          </div>
-        </section>
       </main>
 
       <footer class="site-footer">
@@ -501,7 +454,7 @@
         <p class="help-dialog__intro">Keyboard controls for workspaces, search, and dialogs.</p>
         <ul class="help-list">
           <li><span class="help-list__keys"><kbd>Ctrl</kbd><kbd>K</kbd></span><span><strong>Open command launcher</strong><small>Search every destination and workspace</small></span><button type="button" data-action="open-launcher">Try</button></li>
-          <li><span class="help-list__keys"><kbd>1</kbd> to <kbd>4</kbd></span><span><strong>Switch workspaces</strong><small>Only when focus is not on an interactive control</small></span><button type="button" data-action="switch-workspace" data-workspace-target="3">Explore</button></li>
+          <li><span class="help-list__keys"><kbd>1</kbd> to <kbd>3</kbd></span><span><strong>Switch workspaces</strong><small>Only when focus is not on an interactive control</small></span><button type="button" data-action="switch-workspace" data-workspace-target="3">Explore</button></li>
           <li><span class="help-list__keys"><kbd>?</kbd></span><span><strong>Open this help</strong><small>Keep the map close when you need it</small></span><button type="button" data-action="close-overlays">Done</button></li>
           <li><span class="help-list__keys"><kbd>Esc</kbd></span><span><strong>Close overlays</strong><small>Return to the surface underneath</small></span><button type="button" data-action="close-overlays">Close</button></li>
         </ul>
