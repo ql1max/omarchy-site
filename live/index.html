@@ -21,8 +21,6 @@
           <button class="is-active" type="button" data-live-workspace="1" aria-current="true"><span>1</span></button>
           <button type="button" data-live-workspace="2" aria-current="false"><span>2</span></button>
           <button type="button" data-live-workspace="3" aria-current="false"><span>3</span></button>
-          <button type="button" data-live-workspace="4" aria-current="false"><span>4</span></button>
-          <button type="button" data-live-workspace="5" aria-current="false"><span>5</span></button>
         </nav>
       </div>
       <time class="live-clock" data-live-clock>--:--</time>
@@ -41,10 +39,8 @@
             <input id="live-command" data-live-command autocomplete="off" spellcheck="false" aria-label="Terminal command">
           </form>
         </article>
-      </section>
 
-      <section class="live-space" data-live-space="2" aria-label="Workspace 2" hidden>
-        <article class="live-window live-window--browser is-focused" data-live-window data-live-app="browser">
+        <article class="live-window live-window--browser" data-live-window data-live-app="browser">
           <header class="live-window__bar" data-live-drag-handle><span>Browser</span></header>
           <div class="live-browser">
             <img src="/omarchy-site/assets/images/omarchy-wordmark.svg" width="4131" height="950" alt="Omarchy">
@@ -54,8 +50,8 @@
         </article>
       </section>
 
-      <section class="live-space" data-live-space="3" aria-label="Workspace 3" hidden>
-        <article class="live-window live-window--files is-focused" data-live-window data-live-app="files">
+      <section class="live-space is-split-vertical" data-live-space="2" aria-label="Workspace 2" hidden>
+        <article class="live-window live-window--files" data-live-window data-live-app="files">
           <header class="live-window__bar" data-live-drag-handle><span>Files</span></header>
           <div class="live-files">
             <a href="/manual/"><strong>Manual</strong><small>Documentation</small></a>
@@ -64,10 +60,22 @@
             <a href="/omarchy-site/"><strong>Website</strong><small>Return home</small></a>
           </div>
         </article>
+
+        <article class="live-window live-window--notes" data-live-window data-live-app="notes">
+          <header class="live-window__bar" data-live-drag-handle><span>Notes</span></header>
+          <div class="live-notes">
+            <p><strong>Omarchy notes</strong></p>
+            <p>Windows tile by default and snap into place.</p>
+            <p>Focus moves with the arrow keys, swaps with Shift.</p>
+          </div>
+        </article>
       </section>
 
-      <section class="live-space" data-live-space="4" aria-label="Workspace 4" hidden></section>
-      <section class="live-space" data-live-space="5" aria-label="Workspace 5" hidden></section>
+      <section class="live-space" data-live-space="3" aria-label="Workspace 3" hidden>
+        <div class="live-empty">
+          <p>Empty workspace. Open an app from the menu to tile it here.</p>
+        </div>
+      </section>
     </main>
 
     <div class="live-launcher" data-live-launcher hidden>
@@ -75,44 +83,45 @@
         <label class="live-menu-search"><input type="search" data-live-menu-search placeholder="Go…" autocomplete="off" spellcheck="false" aria-label="Filter menu"></label>
 
         <div class="live-menu-view" data-live-menu-view="root">
-          <button class="is-selected" type="button" data-live-menu-target="apps"><span class="live-menu-icon">▦</span><span>Apps</span><span class="live-menu-arrow">›</span></button>
-          <button type="button" data-live-menu-target="learn"><span class="live-menu-icon">◉</span><span>Learn</span><span class="live-menu-arrow">›</span></button>
-          <button type="button"><span class="live-menu-icon">➤</span><span>Trigger</span><span class="live-menu-arrow">›</span></button>
-          <button type="button" data-live-menu-target="style"><span class="live-menu-icon">⌁</span><span>Style</span><span class="live-menu-arrow">›</span></button>
-          <button type="button"><span class="live-menu-icon">✹</span><span>Setup</span><span class="live-menu-arrow">›</span></button>
-          <button type="button"><span class="live-menu-icon">▣</span><span>Install</span><span class="live-menu-arrow">›</span></button>
-          <button type="button"><span class="live-menu-icon">⊠</span><span>Remove</span><span class="live-menu-arrow">›</span></button>
-          <button type="button"><span class="live-menu-icon">⟳</span><span>Update</span><span class="live-menu-arrow">›</span></button>
-          <a href="/omarchy-site/"><span class="live-menu-icon">ⓘ</span><span>About</span><span class="live-menu-arrow"></span></a>
-          <button type="button" data-live-menu-target="system"><span class="live-menu-icon">◷</span><span>System</span><span class="live-menu-arrow">›</span></button>
+          <button class="is-selected" type="button" data-live-menu-target="apps"><span>Apps</span><span class="live-menu-arrow">›</span></button>
+          <button type="button" data-live-menu-target="learn"><span>Learn</span><span class="live-menu-arrow">›</span></button>
+          <button type="button"><span>Trigger</span><span class="live-menu-arrow">›</span></button>
+          <button type="button" data-live-menu-target="style"><span>Style</span><span class="live-menu-arrow">›</span></button>
+          <button type="button"><span>Setup</span><span class="live-menu-arrow">›</span></button>
+          <button type="button"><span>Install</span><span class="live-menu-arrow">›</span></button>
+          <button type="button"><span>Remove</span><span class="live-menu-arrow">›</span></button>
+          <button type="button"><span>Update</span><span class="live-menu-arrow">›</span></button>
+          <a href="/omarchy-site/"><span>About</span><span class="live-menu-arrow"></span></a>
+          <button type="button" data-live-menu-target="system"><span>System</span><span class="live-menu-arrow">›</span></button>
         </div>
 
         <div class="live-menu-view" data-live-menu-view="apps" hidden>
-          <button type="button" data-live-menu-target="root"><span class="live-menu-icon">‹</span><span>Back</span><span></span></button>
-          <button type="button" data-live-open-app="terminal"><span class="live-menu-icon">&gt;_</span><span>Terminal</span><span></span></button>
-          <button type="button" data-live-open-app="browser"><span class="live-menu-icon">◎</span><span>Browser</span><span></span></button>
-          <button type="button" data-live-open-app="files"><span class="live-menu-icon">□</span><span>Files</span><span></span></button>
-          <a href="/omarchy-site/"><span class="live-menu-icon">↖</span><span>Website</span><span></span></a>
+          <button type="button" data-live-menu-target="root"><span>Back</span><span></span></button>
+          <button type="button" data-live-open-app="terminal"><span>Terminal</span><span></span></button>
+          <button type="button" data-live-open-app="browser"><span>Browser</span><span></span></button>
+          <button type="button" data-live-open-app="files"><span>Files</span><span></span></button>
+          <button type="button" data-live-open-app="notes"><span>Notes</span><span></span></button>
+          <a href="/omarchy-site/"><span>Website</span><span></span></a>
         </div>
 
         <div class="live-menu-view" data-live-menu-view="learn" hidden>
-          <button type="button" data-live-menu-target="root"><span class="live-menu-icon">‹</span><span>Back</span><span></span></button>
-          <a href="/manual/"><span class="live-menu-icon">?</span><span>Manual</span><span></span></a>
-          <button type="button" data-live-action="bindings"><span class="live-menu-icon">⌨</span><span>Keybindings</span><span></span></button>
+          <button type="button" data-live-menu-target="root"><span>Back</span><span></span></button>
+          <a href="/manual/"><span>Manual</span><span></span></a>
+          <button type="button" data-live-action="bindings"><span>Keybindings</span><span></span></button>
         </div>
 
         <div class="live-menu-view" data-live-menu-view="style" hidden>
-          <button type="button" data-live-menu-target="root"><span class="live-menu-icon">‹</span><span>Back</span><span></span></button>
-          <button type="button" data-live-theme-value="omarchy"><span class="live-menu-icon">◐</span><span>Omarchy</span><span class="live-menu-arrow">✓</span></button>
-          <button type="button" data-live-theme-value="tokyo-night"><span class="live-menu-icon">▣</span><span>Tokyo Night</span><span class="live-menu-arrow"></span></button>
-          <button type="button" data-live-theme-value="catppuccin"><span class="live-menu-icon">☁</span><span>Catppuccin</span><span class="live-menu-arrow"></span></button>
-          <button type="button" data-live-theme-value="gruvbox"><span class="live-menu-icon">✹</span><span>Gruvbox</span><span class="live-menu-arrow"></span></button>
-          <button type="button" data-live-theme-value="nord"><span class="live-menu-icon">❄</span><span>Nord</span><span class="live-menu-arrow"></span></button>
+          <button type="button" data-live-menu-target="root"><span>Back</span><span></span></button>
+          <button type="button" data-live-theme-value="omarchy"><span>Omarchy</span><span class="live-menu-arrow">✓</span></button>
+          <button type="button" data-live-theme-value="tokyo-night"><span>Tokyo Night</span><span class="live-menu-arrow"></span></button>
+          <button type="button" data-live-theme-value="catppuccin"><span>Catppuccin</span><span class="live-menu-arrow"></span></button>
+          <button type="button" data-live-theme-value="gruvbox"><span>Gruvbox</span><span class="live-menu-arrow"></span></button>
+          <button type="button" data-live-theme-value="nord"><span>Nord</span><span class="live-menu-arrow"></span></button>
         </div>
 
         <div class="live-menu-view" data-live-menu-view="system" hidden>
-          <button type="button" data-live-menu-target="root"><span class="live-menu-icon">‹</span><span>Back</span><span></span></button>
-          <a href="/omarchy-site/"><span class="live-menu-icon">◷</span><span>Exit demo</span><span></span></a>
+          <button type="button" data-live-menu-target="root"><span>Back</span><span></span></button>
+          <a href="/omarchy-site/"><span>Exit demo</span><span></span></a>
         </div>
       </div>
     </div>
@@ -128,7 +137,7 @@
         <div><dt><kbd>Enter</kbd></dt><dd>Terminal</dd></div>
         <div><dt><kbd>B</kbd></dt><dd>Browser</dd></div>
         <div><dt><kbd>E</kbd></dt><dd>Files</dd></div>
-        <div><dt><kbd>1</kbd> to <kbd>5</kbd></dt><dd>Switch workspace</dd></div>
+        <div><dt><kbd>1</kbd> to <kbd>3</kbd></dt><dd>Switch workspace</dd></div>
         <div><dt><kbd>Space</kbd></dt><dd>Open menu</dd></div>
       </dl>
     </aside>

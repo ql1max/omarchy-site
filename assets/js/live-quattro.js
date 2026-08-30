@@ -305,7 +305,7 @@ function runCommand(rawCommand) {
     addTerminalLine('Nice try.');
     return;
   }
-  if (name === 'help') return void addTerminalLine('Commands: about, clear, cowsay, date, help, manual, matrix, neofetch, theme, workspace 1-5');
+  if (name === 'help') return void addTerminalLine('Commands: about, clear, cowsay, date, help, manual, matrix, neofetch, theme, workspace 1-3');
   if (name === 'about') return void addTerminalLine('Omarchy Quattro 4.0.1');
   if (name === 'clear') return void terminalOutput.replaceChildren();
   if (name === 'cowsay') return void cowsay(rawCommand.trim().slice(name.length).trim());
@@ -325,7 +325,7 @@ function runCommand(rawCommand) {
     line.append(link);
     return;
   }
-  if (name === 'workspace' && /^[1-5]$/.test(argument || '')) return void switchSpace(argument);
+  if (name === 'workspace' && /^[1-3]$/.test(argument || '')) return void switchSpace(argument);
   addTerminalLine(`${name}: command not found`, 'live-error');
 }
 
@@ -344,7 +344,7 @@ function initWindows() {
       handle.setPointerCapture(event.pointerId);
       const move = (moveEvent) => {
         const x = Math.min(window.innerWidth - rect.width, Math.max(0, startLeft + moveEvent.clientX - startX));
-        const y = Math.min(window.innerHeight - rect.height - 36, Math.max(30, startTop + moveEvent.clientY - startY));
+        const y = Math.min(window.innerHeight - rect.height - 44, Math.max(30, startTop + moveEvent.clientY - startY));
         windowElement.style.left = `${x}px`;
         windowElement.style.top = `${y}px`;
       };
@@ -410,7 +410,7 @@ document.addEventListener('keydown', (event) => {
     launcher?.hidden ? openLauncher() : closeLauncher();
     return;
   }
-  if (/^[1-5]$/.test(event.key)) {
+  if (/^[1-3]$/.test(event.key)) {
     event.preventDefault();
     switchSpace(event.key);
     return;
@@ -436,8 +436,6 @@ let initialTheme = 'omarchy';
 try { initialTheme = window.localStorage.getItem('omarchy-live-theme') || initialTheme; } catch { /* keep default */ }
 applyTheme(initialTheme, { persist: false });
 initWindows();
-openApp('browser');
-openApp('files');
 tileAllWorkspaces();
 switchSpace('1');
 focusWindow(document.querySelector('[data-live-app="terminal"]'));
