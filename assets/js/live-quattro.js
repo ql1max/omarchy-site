@@ -3,6 +3,13 @@ const launcher = document.querySelector('[data-live-launcher]');
 const bindingsPanel = document.querySelector('[data-live-bindings]');
 const commandInput = document.querySelector('[data-live-command]');
 const terminalOutput = document.querySelector('[data-live-terminal-output]');
+const THEMES = Object.freeze({
+  omarchy: 'Omarchy',
+  'tokyo-night': 'Tokyo Night',
+  catppuccin: 'Catppuccin',
+  gruvbox: 'Gruvbox',
+  nord: 'Nord'
+});
 let currentSpace = '1';
 
 function activeSpace() {
@@ -80,7 +87,6 @@ function openApp(appName) {
   closeLauncher();
 }
 
-
 function showMenuView(name) {
   launcher?.querySelectorAll('[data-live-menu-view]').forEach((view) => {
     view.hidden = view.dataset.liveMenuView !== name;
@@ -106,9 +112,25 @@ function toggleBindings() {
   bindingsPanel.hidden = !bindingsPanel.hidden;
 }
 
-function toggleTheme() {
-  body.dataset.liveTheme = body.dataset.liveTheme === 'nord' ? '' : 'nord';
-  closeLauncher();
+function applyTheme(requestedTheme, { persist = true } = {}) {
+  const theme = THEMES[requestedTheme] ? requestedTheme : 'omarchy';
+  body.dataset.liveTheme = theme;
+  document.querySelectorAll('[data-live-theme-value]').forEach((option) => {
+    const active = option.dataset.liveThemeValue === theme;
+    option.classList.toggle('is-selected', active);
+    const arrow = option.querySelector('.live-menu-arrow');
+    if (arrow) arrow.textContent = active ? '✓' : '';
+  });
+  if (persist) {
+    try { window.localStorage.setItem('omarchy-live-theme', theme); } catch { /* storage can be unavailable */ }
+  }
+  return theme;
+}
+
+function cycleTheme() {
+  const order = Object.keys(THEMES);
+  const next = order[(order.indexOf(body.dataset.liveTheme || 'omarchy') + 1) % order.length];
+  return applyTheme(next);
 }
 
 function focusedWindow() {
@@ -194,18 +216,105 @@ function addTerminalLine(value, className = '') {
   return line;
 }
 
+function cowsay(text) {
+  const message = (text || 'moo').slice(0, 60);
+  addTerminalLine([
+    ' ' + '_'.repeat(message.length + 2),
+    `< ${message} >`,
+    ' ' + '-'.repeat(message.length + 2),
+    '        \\   ^__^',
+    '         \\  (oo)\\_______',
+    '            (__)\\       )\\\\/\\',
+    '                ||----w |',
+    '                ||     ||'
+  ].join('\n'));
+}
+
+function neofetch() {
+  const uptime = Math.max(1, Math.round(performance.now() / 60000));
+  addTerminalLine([
+    'omarchy@quattro',
+    '---------------',
+    'OS       Omarchy Quattro 4.0.1',
+    'WM       Hyprland (simulated)',
+    'Shell    your browser',
+    `Theme    ${THEMES[body.dataset.liveTheme] || 'Omarchy'}`,
+    `Uptime   ${uptime} min in this tab`,
+    'Memory   whatever your browser has left'
+  ].join('\n'));
+}
+
+function matrixRain() {
+  if (document.querySelector('[data-live-matrix]')) return;
+  const canvas = document.createElement('canvas');
+  canvas.className = 'live-matrix';
+  canvas.dataset.liveMatrix = '';
+  document.body.append(canvas);
+  const context = canvas.getContext('2d');
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+  const characters = 'ﾊﾐﾋｰｳｼﾅﾓﾆｻﾜﾂｵﾘｱﾎﾃ0123456789';
+  const fontSize = 16;
+  const drops = Array.from({ length: Math.floor(canvas.width / fontSize) }, () => Math.random() * -40);
+  const color = getComputedStyle(document.body).getPropertyValue('--lv-green').trim() || '#9ece6a';
+  const started = performance.now();
+  const stop = () => {
+    window.clearInterval(timer);
+    document.removeEventListener('keydown', onKey, true);
+    canvas.remove();
+  };
+  const onKey = (event) => {
+    event.stopPropagation();
+    stop();
+  };
+  const timer = window.setInterval(() => {
+    context.fillStyle = 'rgba(0, 0, 0, 0.08)';
+    context.fillRect(0, 0, canvas.width, canvas.height);
+    context.fillStyle = color;
+    context.font = `${fontSize}px monospace`;
+    drops.forEach((drop, index) => {
+      context.fillText(characters[Math.floor(Math.random() * characters.length)], index * fontSize, drop * fontSize);
+      drops[index] = drop * fontSize > canvas.height && Math.random() > 0.975 ? 0 : drop + 1;
+    });
+    if (performance.now() - started > 9000) stop();
+  }, 50);
+  document.addEventListener('keydown', onKey, true);
+  canvas.addEventListener('click', stop);
+}
+
+const KONAMI = Object.freeze(['arrowup', 'arrowup', 'arrowdown', 'arrowdown', 'arrowleft', 'arrowright', 'arrowleft', 'arrowright', 'b', 'a']);
+let konamiProgress = [];
+
+function trackKonami(key) {
+  konamiProgress = key === KONAMI[konamiProgress.length] ? [...konamiProgress, key] : key === KONAMI[0] ? [key] : [];
+  if (konamiProgress.length === KONAMI.length) {
+    konamiProgress = [];
+    addTerminalLine('∞ Konami code accepted. Wake up, quattro.');
+    matrixRain();
+  }
+}
+
 function runCommand(rawCommand) {
   const command = rawCommand.trim();
   addTerminalLine(`omarchy@quattro:~$ ${command}`, 'live-command');
   if (!command) return;
   const [name, argument] = command.toLowerCase().split(/\s+/, 2);
-  if (name === 'help') return void addTerminalLine('Commands: about, clear, date, help, manual, theme, workspace 1-5');
+  if (/rm\s+-rf\s+\/(\s|$)/.test(command)) {
+    addTerminalLine("rm: it is dangerous to operate recursively on '/'");
+    addTerminalLine('rm: use --no-preserve-root to override this failsafe');
+    addTerminalLine('Nice try.');
+    return;
+  }
+  if (name === 'help') return void addTerminalLine('Commands: about, clear, cowsay, date, help, manual, matrix, neofetch, theme, workspace 1-5');
   if (name === 'about') return void addTerminalLine('Omarchy Quattro 4.0.1');
   if (name === 'clear') return void terminalOutput.replaceChildren();
+  if (name === 'cowsay') return void cowsay(rawCommand.trim().slice(name.length).trim());
   if (name === 'date') return void addTerminalLine(new Date().toString());
+  if (name === 'matrix') return void matrixRain();
+  if (name === 'neofetch') return void neofetch();
   if (name === 'theme') {
-    toggleTheme();
-    addTerminalLine(`Theme: ${body.dataset.liveTheme === 'nord' ? 'Nord' : 'Tokyo Night'}`);
+    const theme = cycleTheme();
+    addTerminalLine(`Theme: ${THEMES[theme]}`);
     return;
   }
   if (name === 'manual') {
@@ -235,7 +344,7 @@ function initWindows() {
       handle.setPointerCapture(event.pointerId);
       const move = (moveEvent) => {
         const x = Math.min(window.innerWidth - rect.width, Math.max(0, startLeft + moveEvent.clientX - startX));
-        const y = Math.min(window.innerHeight - rect.height - 30, Math.max(0, startTop + moveEvent.clientY - startY));
+        const y = Math.min(window.innerHeight - rect.height - 30, Math.max(30, startTop + moveEvent.clientY - startY));
         windowElement.style.left = `${x}px`;
         windowElement.style.top = `${y}px`;
       };
@@ -264,7 +373,6 @@ document.querySelectorAll('[data-live-action]').forEach((button) => {
     const action = button.dataset.liveAction;
     if (action === 'launcher') openLauncher();
     if (action === 'close') closeLauncher();
-    if (action === 'theme') toggleTheme();
     if (action === 'bindings') {
       closeLauncher();
       toggleBindings();
@@ -272,6 +380,7 @@ document.querySelectorAll('[data-live-action]').forEach((button) => {
   });
 });
 launcher?.addEventListener('click', (event) => { if (event.target === launcher) closeLauncher(); });
+document.querySelectorAll('[data-live-theme-value]').forEach((button) => button.addEventListener('click', () => { applyTheme(button.dataset.liveThemeValue); closeLauncher(); }));
 document.querySelector('[data-live-terminal-form]')?.addEventListener('submit', (event) => {
   event.preventDefault();
   runCommand(commandInput.value);
@@ -287,6 +396,13 @@ document.addEventListener('keydown', (event) => {
     closeLauncher();
     if (bindingsPanel) bindingsPanel.hidden = true;
     return;
+  }
+  if (!typing) {
+    trackKonami(key);
+    if (konamiProgress.length > 0 && (event.key.startsWith('Arrow') || key === 'b' || key === 'a')) {
+      event.preventDefault();
+      return;
+    }
   }
   if (typing || overlayControl || event.ctrlKey || event.altKey || event.metaKey) return;
   if (event.code === 'Space') {
@@ -316,6 +432,9 @@ document.addEventListener('keydown', (event) => {
 
 updateClock();
 window.setInterval(updateClock, 10000);
+let initialTheme = 'omarchy';
+try { initialTheme = window.localStorage.getItem('omarchy-live-theme') || initialTheme; } catch { /* keep default */ }
+applyTheme(initialTheme, { persist: false });
 initWindows();
 openApp('browser');
 openApp('files');

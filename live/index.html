@@ -28,7 +28,6 @@
       <time class="live-clock" data-live-clock>--:--</time>
       <div class="live-panel__right" aria-hidden="true"></div>
     </header>
-
     <main class="live-desktop">
       <section class="live-space is-active" data-live-space="1" aria-label="Workspace 1">
         <article class="live-window live-window--terminal is-focused" data-live-window data-live-app="terminal">
@@ -79,7 +78,7 @@
           <button class="is-selected" type="button" data-live-menu-target="apps"><span class="live-menu-icon">▦</span><span>Apps</span><span class="live-menu-arrow">›</span></button>
           <button type="button" data-live-menu-target="learn"><span class="live-menu-icon">◉</span><span>Learn</span><span class="live-menu-arrow">›</span></button>
           <button type="button"><span class="live-menu-icon">➤</span><span>Trigger</span><span class="live-menu-arrow">›</span></button>
-          <button type="button" data-live-action="theme"><span class="live-menu-icon">⌁</span><span>Style</span><span class="live-menu-arrow">›</span></button>
+          <button type="button" data-live-menu-target="style"><span class="live-menu-icon">⌁</span><span>Style</span><span class="live-menu-arrow">›</span></button>
           <button type="button"><span class="live-menu-icon">✹</span><span>Setup</span><span class="live-menu-arrow">›</span></button>
           <button type="button"><span class="live-menu-icon">▣</span><span>Install</span><span class="live-menu-arrow">›</span></button>
           <button type="button"><span class="live-menu-icon">⊠</span><span>Remove</span><span class="live-menu-arrow">›</span></button>
@@ -100,6 +99,15 @@
           <button type="button" data-live-menu-target="root"><span class="live-menu-icon">‹</span><span>Back</span><span></span></button>
           <a href="https://omarchy.org/manual/"><span class="live-menu-icon">?</span><span>Manual</span><span></span></a>
           <button type="button" data-live-action="bindings"><span class="live-menu-icon">⌨</span><span>Keybindings</span><span></span></button>
+        </div>
+
+        <div class="live-menu-view" data-live-menu-view="style" hidden>
+          <button type="button" data-live-menu-target="root"><span class="live-menu-icon">‹</span><span>Back</span><span></span></button>
+          <button type="button" data-live-theme-value="omarchy"><span class="live-menu-icon">◐</span><span>Omarchy</span><span class="live-menu-arrow">✓</span></button>
+          <button type="button" data-live-theme-value="tokyo-night"><span class="live-menu-icon">▣</span><span>Tokyo Night</span><span class="live-menu-arrow"></span></button>
+          <button type="button" data-live-theme-value="catppuccin"><span class="live-menu-icon">☁</span><span>Catppuccin</span><span class="live-menu-arrow"></span></button>
+          <button type="button" data-live-theme-value="gruvbox"><span class="live-menu-icon">✹</span><span>Gruvbox</span><span class="live-menu-arrow"></span></button>
+          <button type="button" data-live-theme-value="nord"><span class="live-menu-icon">❄</span><span>Nord</span><span class="live-menu-arrow"></span></button>
         </div>
 
         <div class="live-menu-view" data-live-menu-view="system" hidden>
@@ -124,6 +132,10 @@
         <div><dt><kbd>Space</kbd></dt><dd>Open menu</dd></div>
       </dl>
     </aside>
-    <a class="live-exit" href="/omarchy-site/">Exit demo</a>
+    <footer class="live-ticker">
+      <span class="live-ticker__badge">Demo</span>
+      <span class="live-ticker__text">Interactive browser preview of the Omarchy desktop. Nothing here touches your machine.</span>
+      <a class="live-ticker__exit" href="/omarchy-site/">Exit demo</a>
+    </footer>
   </body>
 </html>
