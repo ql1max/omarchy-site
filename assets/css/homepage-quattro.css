@@ -717,7 +717,7 @@ body.js-ready .workspace:not(.is-active) {
   gap: var(--quattro-gap-inner);
   justify-content: center;
   min-height: 34px;
-  padding: 6px 10px;
+  padding: 6px 14px;
   text-decoration: none !important;
   transition:
     background-color 140ms ease,
@@ -810,9 +810,6 @@ body.js-ready .workspace:not(.is-active) {
 
 .text-button {
   align-self: flex-start;
-  border-color: transparent;
-  min-height: 24px;
-  padding-inline: 0;
 }
 
 /* Video facades deliberately defer the YouTube request until activation. */
@@ -1074,12 +1071,6 @@ body.quattro-body kbd {
   font-size: 12px;
   line-height: 1.35;
   margin-top: 2px;
-}
-
-.shortcut-cards button,
-.help-list button {
-  min-height: 24px;
-  padding-inline: 6px;
 }
 
 .cheatsheet {

@@ -368,7 +368,8 @@ input:focus-visible {
 
 .live-browser a + a {
   background: transparent;
-  color: #fff;
+  border-color: rgba(var(--lv-text-rgb), 0.42);
+  color: var(--lv-text);
 }
 
 .live-window--files {
@@ -543,11 +544,12 @@ input:focus-visible {
 }
 
 .live-bindings > div button {
-  background: transparent;
-  border: 0;
-  color: var(--lv-red);
+  background: rgba(var(--lv-text-rgb), 0.08);
+  border: 1px solid rgba(var(--lv-text-rgb), 0.42);
+  color: var(--lv-text);
   cursor: pointer;
-  font-size: 18px;
+  height: 28px;
+  width: 28px;
 }
 
 .live-bindings dl {
