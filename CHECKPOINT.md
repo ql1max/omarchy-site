@@ -23,10 +23,35 @@ homepage redesigns (https://x.com/dhh/status/2093946369731854766) and his
 
 ## Local checkout
 
-`/opt/mother/work/omarchy-site`
-- Branch `feat/interactive-quattro-homepage` — clean, matches remote
-- Branch `gh-pages` — demo deploy branch, do not PR this
-- Branch `master` — untouched upstream
+`/home/stephano/src/omarchy-site` (single checkout, all branches local)
+- Branch `gh-pages` — **live demo deploy branch, tracks `fork/gh-pages`**.
+  This is where fixes go while the demo is the priority (see workflow below).
+- Branch `feat/interactive-quattro-homepage` — PR candidate, dormant while no
+  upstream PR is planned. Heavily diverged from `fork/`'s copy (ahead 339 /
+  behind 317) — do NOT force-push or merge blindly; port fixes manually.
+- Branch `add-theme-eva-01` — Eva 01 theme work, pushed to fork for backup.
+- Branch `pr/homepage-redesign` — old leftover, kept for reference.
+- `master` — untouched upstream (tracks `origin/master`).
+
+## Deploy workflow (current, since 2026-09-04)
+
+While Stephano is iterating on the demo and NOT making PRs to the upstream
+omacom/omarchy-site, **all fixes go directly on the `gh-pages` branch**:
+
+```
+git checkout gh-pages
+# ...edit, commit...
+git push fork gh-pages   # live at ql1max.github.io/omarchy-site within ~1 min
+```
+
+When upstream PR work resumes, port the commits onto
+`feat/interactive-quattro-homepage`, remembering the path-hack differences
+(`/omarchy-site/` prefixes and absolute logo WASM paths on gh-pages vs `/assets/`
+on the feature branch). Never merge gh-pages into the feature branch.
+
+Example of the flow working end to end: the launcher focus-ring fix exists as
+`0e3ef95` on `gh-pages` (pushed, live) and was originally written as `2bee4bd`
+on the feature branch.
 
 ## Implementation summary
 
@@ -87,5 +112,5 @@ browser when needed).
 ## If Stephano wants to resume
 
 Say "resume the Omarchy homepage work" — read this file, check
-`git log` in `/opt/mother/work/omarchy-site`, and check for a reply from
-design@omarchy.org (not accessible from MOTHER; Stephano checks his inbox).
+`git log` in `/home/stephano/src/omarchy-site`, and check for a reply from
+design@omarchy.org (Stephano checks his inbox).
