@@ -36,7 +36,7 @@
       <header class="topbar" aria-label="Omarchy desktop panel">
         <div class="topbar__left">
           <button class="omarchy-button" id="omarchy-menu" type="button" data-action="open-launcher" aria-haspopup="dialog" aria-controls="command-launcher" title="Open Omarchy launcher (Ctrl+K)">
-            <span class="omarchy-button__mark" aria-hidden="true"><span></span><span></span><span></span></span>
+            <img class="omarchy-button__icon" src="/icon.svg" alt="" width="16" height="16">
             <span class="omarchy-button__label">Omarchy</span>
             <kbd class="topbar__shortcut">Ctrl K</kbd>
           </button>
@@ -67,6 +67,10 @@
         </div>
 
         <div class="topbar__right">
+          <button class="theme-button" type="button" data-action="open-themes" aria-haspopup="dialog" aria-controls="theme-picker" title="Change Omarchy theme">
+            <span class="theme-button__swatch" aria-hidden="true"></span>
+            <span class="theme-button__label" data-theme-label>Tokyo Night</span>
+          </button>
           <span class="system-glyph" title="Network connected" aria-label="Network connected"><span aria-hidden="true">⌁</span></span>
           <span class="system-glyph" title="Audio enabled" aria-label="Audio enabled"><span aria-hidden="true">◖</span></span>
           <span class="system-glyph system-glyph--battery" title="Battery 87 percent" aria-label="Battery 87 percent"><span aria-hidden="true"></span></span>
@@ -126,19 +130,27 @@
               </div>
             </article>
 
-            <article class="window window--notes">
+            <article class="window window--notes window--release">
               <div class="window__titlebar">
                 <span class="window__traffic" aria-hidden="true"><i></i><i></i><i></i></span>
-                <h3>status / a few good defaults</h3>
-                <span class="window__meta">notes</span>
+                <h3>release / latest</h3>
+                <span class="window__meta">stable</span>
               </div>
-              <div class="window__body notes-window">
-                <ul class="signal-list">
-                  <li><span class="signal-list__index">01</span><span><strong>Agent-ready.</strong> The system is yours to alter, not a shrine to preserve.</span></li>
-                  <li><span class="signal-list__index">02</span><span><strong>Keyboard-first.</strong> Every surface has a shortcut and a button.</span></li>
-                  <li><span class="signal-list__index">03</span><span><strong>Opinionated.</strong> Fewer decisions, more time making things.</span></li>
-                </ul>
-                <button class="text-button" type="button" data-action="switch-workspace" data-workspace-target="4">Learn the desktop <span aria-hidden="true">→</span></button>
+              <div class="window__body release-window">
+                <div class="release-window__heading">
+                  <span class="release-window__version">v4.0.1</span>
+                  <span class="release-window__badge"><span aria-hidden="true"></span> latest</span>
+                </div>
+                <p class="release-window__name">Omarchy Quattro</p>
+                <p class="release-window__summary">Fast-follow security and reliability fixes, validated with the Omarchy Security team.</p>
+                <dl class="release-window__meta">
+                  <div><dt>Published</dt><dd><time datetime="2026-08-25">25 Aug 2026</time></dd></div>
+                  <div><dt>Channel</dt><dd>stable</dd></div>
+                </dl>
+                <div class="release-window__actions">
+                  <a class="action action--primary" href="https://github.com/omacom/omarchy/releases/tag/v4.0.1">Release notes <span aria-hidden="true">↗</span></a>
+                  <a class="action" href="https://iso.omarchy.org/omarchy-4.0.1.iso">Get the ISO <span aria-hidden="true">↓</span></a>
+                </div>
               </div>
             </article>
           </div>
@@ -339,6 +351,37 @@
         <div class="launcher-results__frame">
           <ul class="launcher-results" id="launcher-results" role="listbox" aria-label="Command launcher results"></ul>
           <p class="launcher-empty" data-launcher-empty hidden>No matching commands. Try “manual”, “watch”, or “discord”.</p>
+        </div>
+      </div>
+    </dialog>
+
+    <dialog class="overlay-dialog theme-dialog" id="theme-picker" aria-labelledby="theme-title" aria-modal="true">
+      <div class="dialog-surface">
+        <div class="dialog-header">
+          <div>
+            <p class="eyebrow">Omarchy / themes</p>
+            <h2 id="theme-title">Try another desktop</h2>
+          </div>
+          <button class="dialog-close" type="button" data-action="close-overlays" aria-label="Close theme picker" title="Close (Escape)">×</button>
+        </div>
+        <p class="theme-dialog__intro">These are real themes and wallpapers shipped with Omarchy. Pick one to recolor the complete desktop.</p>
+        <div class="theme-grid" role="group" aria-label="Desktop theme">
+          <button class="theme-option is-active" type="button" data-theme-value="tokyo-night" aria-pressed="true">
+            <span class="theme-option__preview theme-option__preview--tokyo-night" aria-hidden="true"></span>
+            <span><strong>Tokyo Night</strong><small>Quattro default</small></span>
+          </button>
+          <button class="theme-option" type="button" data-theme-value="catppuccin" aria-pressed="false">
+            <span class="theme-option__preview theme-option__preview--catppuccin" aria-hidden="true"></span>
+            <span><strong>Catppuccin</strong><small>Mocha waves</small></span>
+          </button>
+          <button class="theme-option" type="button" data-theme-value="gruvbox" aria-pressed="false">
+            <span class="theme-option__preview theme-option__preview--gruvbox" aria-hidden="true"></span>
+            <span><strong>Gruvbox</strong><small>Warm and grounded</small></span>
+          </button>
+          <button class="theme-option" type="button" data-theme-value="nord" aria-pressed="false">
+            <span class="theme-option__preview theme-option__preview--nord" aria-hidden="true"></span>
+            <span><strong>Nord</strong><small>Cool polar night</small></span>
+          </button>
         </div>
       </div>
     </dialog>
