@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#1a1b26">
+    <meta name="description" content="An interactive Omarchy desktop demo.">
+    <title>Omarchy Desktop Demo</title>
+    <link rel="icon" href="/omarchy-site/assets/images/favicon.png">
+    <link rel="stylesheet" href="/omarchy-site/assets/css/reset.css">
+    <link rel="stylesheet" href="/omarchy-site/assets/css/root.css">
+    <link rel="stylesheet" href="/omarchy-site/assets/css/fonts.css">
+    <link rel="stylesheet" href="/omarchy-site/assets/css/live-quattro.css">
+    <script type="module" src="/omarchy-site/assets/js/live-quattro.js"></script>
+  </head>
+  <body class="live-body">
+    <header class="live-panel" aria-label="Desktop panel">
+      <div class="live-panel__left">
+        <button class="live-icon-button" type="button" data-live-action="launcher" aria-label="Open launcher" title="Open launcher (Ctrl+K)"><img src="/omarchy-site/icon.svg" alt="" width="18" height="18"></button>
+        <nav class="live-workspaces" aria-label="Workspaces">
+          <button class="is-active" type="button" data-live-workspace="1" aria-current="true">1</button>
+          <button type="button" data-live-workspace="2" aria-current="false">2</button>
+          <button type="button" data-live-workspace="3" aria-current="false">3</button>
+          <button type="button" data-live-workspace="4" aria-current="false">4</button>
+        </nav>
+      </div>
+      <time class="live-clock" data-live-clock>--:--</time>
+      <div class="live-status" aria-label="System status"><span>NET</span><span>VOL</span><span>100%</span></div>
+    </header>
+
+    <main class="live-desktop">
+      <section class="live-space is-active" data-live-space="1" aria-label="Workspace 1">
+        <article class="live-window live-window--terminal" data-live-window>
+          <header class="live-window__bar" data-live-drag-handle><span>Terminal</span><span>×</span></header>
+          <div class="live-terminal" data-live-terminal-output>
+            <p><strong>Omarchy Quattro</strong></p>
+            <p>Type <code>help</code> for available commands.</p>
+          </div>
+          <form class="live-prompt" data-live-terminal-form>
+            <label for="live-command"><span>omarchy@quattro</span>:~$</label>
+            <input id="live-command" data-live-command autocomplete="off" spellcheck="false" aria-label="Terminal command">
+          </form>
+        </article>
+      </section>
+
+      <section class="live-space" data-live-space="2" aria-label="Workspace 2" hidden>
+        <article class="live-window live-window--browser" data-live-window>
+          <header class="live-window__bar" data-live-drag-handle><span>Browser</span><a href="/omarchy-site/" aria-label="Close demo">×</a></header>
+          <div class="live-browser">
+            <img src="/omarchy-site/assets/images/omarchy-wordmark.svg" width="4131" height="950" alt="Omarchy">
+            <p>Beautiful, Fun &amp; Opinionated Linux by DHH</p>
+            <div><a href="https://omarchy.org/manual/">Manual</a><a href="https://iso.omarchy.org/omarchy-4.0.1.iso">Download ISO</a></div>
+          </div>
+        </article>
+      </section>
+
+      <section class="live-space" data-live-space="3" aria-label="Workspace 3" hidden>
+        <article class="live-window live-window--files" data-live-window>
+          <header class="live-window__bar" data-live-drag-handle><span>Files</span><span>×</span></header>
+          <div class="live-files">
+            <a href="https://omarchy.org/manual/"><strong>Manual</strong><small>Documentation</small></a>
+            <a href="https://omarchy.org/themes/"><strong>Themes</strong><small>Desktop themes</small></a>
+            <a href="https://github.com/omacom/omarchy"><strong>Source</strong><small>GitHub</small></a>
+            <a href="/omarchy-site/"><strong>Website</strong><small>Return home</small></a>
+          </div>
+        </article>
+      </section>
+
+      <section class="live-space" data-live-space="4" aria-label="Workspace 4" hidden>
+        <div class="live-empty">
+          <img src="/omarchy-site/icon.svg" alt="" width="42" height="42">
+          <p>Workspace 4</p>
+        </div>
+      </section>
+    </main>
+
+    <div class="live-launcher" data-live-launcher hidden>
+      <div class="live-launcher__surface" role="dialog" aria-modal="true" aria-labelledby="live-launcher-title">
+        <div class="live-launcher__header"><h1 id="live-launcher-title">Applications</h1><button type="button" data-live-action="close" aria-label="Close launcher">×</button></div>
+        <div class="live-launcher__grid">
+          <button type="button" data-live-open-space="1"><span>&gt;_</span>Terminal</button>
+          <button type="button" data-live-open-space="2"><span>◎</span>Browser</button>
+          <button type="button" data-live-open-space="3"><span>□</span>Files</button>
+          <a href="/omarchy-site/"><span>↖</span>Website</a>
+          <a href="https://omarchy.org/manual/"><span>?</span>Manual</a>
+          <button type="button" data-live-action="theme"><span>◐</span>Theme</button>
+        </div>
+        <p><kbd>Ctrl K</kbd> launcher <kbd>1</kbd> to <kbd>4</kbd> workspaces <kbd>Esc</kbd> close</p>
+      </div>
+    </div>
+
+    <a class="live-exit" href="/omarchy-site/">Exit demo</a>
+  </body>
+</html>

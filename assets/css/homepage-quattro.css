@@ -37,8 +37,8 @@ body.quattro-body {
 }
 
 /* Fixed wallpaper on its own composited layer. background-attachment: fixed
-   on body forces a full repaint of a 5120x2880 image on every click — Safari
-   flickers and Chrome shows a loading stutter. A pseudo-element paints once. */
+   forces a full repaint on every click. A pseudo-element paints once and
+   avoids loading stutter in Chrome and flicker in Safari. */
 body.quattro-body::before {
   background-color: var(--color-background-night);
   background-image:
