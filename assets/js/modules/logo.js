@@ -4,8 +4,8 @@
 // index.html adds .wte-home before first paint so the green mark stays
 // hidden while the skin loads. Runtime files live in /assets/js/wte/.
 
-const WTE_CANVAS_URL = '/assets/js/wte/wte-canvas.js';
-const WTE_WASM_URL = '/assets/js/wte/laseretch.wasm';
+const WTE_CANVAS_URL = '/omarchy-site/assets/js/wte/wte-canvas.js';
+const WTE_WASM_URL = '/omarchy-site/assets/js/wte/laseretch.wasm';
 const EFFECT = 'laseretch';
 const ART_COLUMNS = 81;
 const ART_ROWS = 10;

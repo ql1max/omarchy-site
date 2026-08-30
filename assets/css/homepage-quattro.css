@@ -24,7 +24,7 @@ body.quattro-body {
   background-color: var(--color-background-night);
   background-image:
     linear-gradient(rgba(var(--rgb-background-night), 0.47), rgba(var(--rgb-background-night), 0.62)),
-    url('/assets/images/quattro-wallpaper.webp');
+    url('/omarchy-site/assets/images/quattro-wallpaper.webp');
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
@@ -55,7 +55,7 @@ body.quattro-body[data-theme='catppuccin'] {
   --quattro-yellow: rgb(249, 226, 175);
   background-image:
     linear-gradient(rgba(var(--rgb-background-night), 0.54), rgba(var(--rgb-background-night), 0.68)),
-    url('/assets/images/themes/catppuccin.webp');
+    url('/omarchy-site/assets/images/themes/catppuccin.webp');
 }
 
 body.quattro-body[data-theme='gruvbox'] {
@@ -73,7 +73,7 @@ body.quattro-body[data-theme='gruvbox'] {
   --quattro-yellow: rgb(216, 166, 87);
   background-image:
     linear-gradient(rgba(var(--rgb-background-night), 0.58), rgba(var(--rgb-background-night), 0.72)),
-    url('/assets/images/themes/gruvbox.webp');
+    url('/omarchy-site/assets/images/themes/gruvbox.webp');
 }
 
 body.quattro-body[data-theme='nord'] {
@@ -91,7 +91,7 @@ body.quattro-body[data-theme='nord'] {
   --quattro-yellow: rgb(235, 203, 139);
   background-image:
     linear-gradient(rgba(var(--rgb-background-night), 0.56), rgba(var(--rgb-background-night), 0.7)),
-    url('/assets/images/themes/nord.webp');
+    url('/omarchy-site/assets/images/themes/nord.webp');
 }
 
 body.quattro-body,
@@ -1481,19 +1481,19 @@ body.quattro-body kbd {
 }
 
 .theme-option__preview--tokyo-night {
-  background-image: url('/assets/images/quattro-wallpaper.webp');
+  background-image: url('/omarchy-site/assets/images/quattro-wallpaper.webp');
 }
 
 .theme-option__preview--catppuccin {
-  background-image: url('/assets/images/themes/catppuccin.webp');
+  background-image: url('/omarchy-site/assets/images/themes/catppuccin.webp');
 }
 
 .theme-option__preview--gruvbox {
-  background-image: url('/assets/images/themes/gruvbox.webp');
+  background-image: url('/omarchy-site/assets/images/themes/gruvbox.webp');
 }
 
 .theme-option__preview--nord {
-  background-image: url('/assets/images/themes/nord.webp');
+  background-image: url('/omarchy-site/assets/images/themes/nord.webp');
 }
 
 .theme-option strong,
