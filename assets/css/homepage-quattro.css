@@ -742,6 +742,17 @@ body.js-ready .workspace:not(.is-active) {
   color: var(--color-background-night) !important;
 }
 
+.action--demo {
+  background: rgba(var(--rgb-green), 0.14);
+  border-color: rgba(var(--rgb-green), 0.78);
+}
+
+.action--demo:hover,
+.action--demo:focus-visible {
+  background: rgba(var(--rgb-green), 0.24);
+  border-color: var(--color-green);
+}
+
 .terminal-window__footer {
   align-items: center;
   border-top: 1px solid rgba(var(--rgb-terminal-white), 0.2);
