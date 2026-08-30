@@ -37,8 +37,13 @@ Single static page: `index.html` + `assets/css/homepage-quattro.css` +
 - Ctrl+K / logo searchable command launcher with all site destinations
 - 4 real Omarchy themes (Tokyo Night, Catppuccin, Gruvbox, Nord) with real
   wallpapers from omacom/omarchy source; persisted in localStorage
-- Animated ASCII wordmark (reused upstream laseretch WASM effect), deferred
-  via requestIdleCallback
+- Wordmark: the official SVG brand asset from omarchy.org/brand
+  (assets/images/omarchy-wordmark.svg), NOT the animated ASCII canvas. The
+  WASM animation was removed 2026-08-30 because the ASCII mark was wrapped in
+  a link to "/" which forced a page reload on click. The wordmark is now a
+  plain <img> with no navigation. Upstream later added their own /brand page
+  (merged into the branch via fork merge f288638); the top-bar icon.svg is
+  byte-identical to the official omarchy-logo.svg.
 - Latest-release widget (v4.0.1, from GitHub releases API at build time —
   hardcoded in HTML, will need updating when a new release ships)
 - Hero CTA row, official Omarchy icon.svg in the top bar
@@ -77,6 +82,9 @@ Themes drive wallpapers via `--quattro-wallpaper` and scrims via
 - 0740278 Remove fake tray glyphs; polish bar type and launcher spacing
 - 47101eb Composite wallpaper on fixed layer; defer logo WASM to idle
 - dc3ecad Make body transparent so fixed wallpaper layer shows
+- a19435b Use official brand wordmark; logo no longer triggers navigation
+- f288638 (fork) Merge of upstream omacom:master adding /brand page
+- 288fd8b Local merge of the above fork merge
 
 ## GitHub access note
 
