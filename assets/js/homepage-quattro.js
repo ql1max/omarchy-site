@@ -237,10 +237,13 @@ function initHomepage() {
   const renderLauncher = (query = '') => {
     if (!launcherResults) return;
     const normalizedQuery = query.trim().toLowerCase();
-    const items = launcherItems().filter((item) => {
+    const matchingItems = launcherItems().filter((item) => {
       const searchable = `${item.label} ${item.description}`.toLowerCase();
       return !normalizedQuery || searchable.includes(normalizedQuery);
     });
+    // Keep the initial command palette scannable. Searching still exposes
+    // every destination as soon as the visitor starts typing.
+    const items = normalizedQuery ? matchingItems : matchingItems.slice(0, 6);
 
     state.visibleLauncherItems = items;
     state.selectedLauncherIndex = 0;
