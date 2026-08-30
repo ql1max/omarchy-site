@@ -22,13 +22,6 @@ html {
 
 body.quattro-body {
   background-color: var(--color-background-night);
-  background-image:
-    linear-gradient(rgba(var(--rgb-background-night), 0.47), rgba(var(--rgb-background-night), 0.62)),
-    url('/assets/images/quattro-wallpaper.webp');
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-attachment: fixed;
   color: var(--color-terminal-white);
   display: block;
   font-family: 'JetBrains Mono', monospace;
@@ -38,6 +31,28 @@ body.quattro-body {
   min-height: 100vh;
   min-height: 100dvh;
   overflow-x: hidden;
+  position: relative;
+}
+
+/* Fixed wallpaper on its own composited layer. background-attachment: fixed
+   on body forces a full repaint of a 5120x2880 image on every click — Safari
+   flickers and Chrome shows a loading stutter. A pseudo-element paints once. */
+body.quattro-body::before {
+  background-color: var(--color-background-night);
+  background-image:
+    linear-gradient(
+      var(--quattro-scrim-top, rgba(var(--rgb-background-night), 0.47)),
+      var(--quattro-scrim-bottom, rgba(var(--rgb-background-night), 0.62))
+    ),
+    var(--quattro-wallpaper, url('/assets/images/quattro-wallpaper.webp'));
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  content: '';
+  inset: 0;
+  pointer-events: none;
+  position: fixed;
+  z-index: -1;
 }
 
 body.quattro-body[data-theme='catppuccin'] {
@@ -53,9 +68,9 @@ body.quattro-body[data-theme='catppuccin'] {
   --quattro-purple: rgb(245, 194, 231);
   --quattro-red: rgb(243, 139, 168);
   --quattro-yellow: rgb(249, 226, 175);
-  background-image:
-    linear-gradient(rgba(var(--rgb-background-night), 0.54), rgba(var(--rgb-background-night), 0.68)),
-    url('/assets/images/themes/catppuccin.webp');
+  --quattro-wallpaper: url('/assets/images/themes/catppuccin.webp');
+  --quattro-scrim-top: rgba(var(--rgb-background-night), 0.54);
+  --quattro-scrim-bottom: rgba(var(--rgb-background-night), 0.68);
 }
 
 body.quattro-body[data-theme='gruvbox'] {
@@ -71,9 +86,9 @@ body.quattro-body[data-theme='gruvbox'] {
   --quattro-purple: rgb(211, 134, 155);
   --quattro-red: rgb(234, 105, 98);
   --quattro-yellow: rgb(216, 166, 87);
-  background-image:
-    linear-gradient(rgba(var(--rgb-background-night), 0.58), rgba(var(--rgb-background-night), 0.72)),
-    url('/assets/images/themes/gruvbox.webp');
+  --quattro-wallpaper: url('/assets/images/themes/gruvbox.webp');
+  --quattro-scrim-top: rgba(var(--rgb-background-night), 0.58);
+  --quattro-scrim-bottom: rgba(var(--rgb-background-night), 0.72);
 }
 
 body.quattro-body[data-theme='nord'] {
@@ -89,9 +104,9 @@ body.quattro-body[data-theme='nord'] {
   --quattro-purple: rgb(180, 142, 173);
   --quattro-red: rgb(191, 97, 106);
   --quattro-yellow: rgb(235, 203, 139);
-  background-image:
-    linear-gradient(rgba(var(--rgb-background-night), 0.56), rgba(var(--rgb-background-night), 0.7)),
-    url('/assets/images/themes/nord.webp');
+  --quattro-wallpaper: url('/assets/images/themes/nord.webp');
+  --quattro-scrim-top: rgba(var(--rgb-background-night), 0.56);
+  --quattro-scrim-bottom: rgba(var(--rgb-background-night), 0.7);
 }
 
 body.quattro-body,
