@@ -203,7 +203,8 @@ body.quattro-body input:focus-visible {
 .topbar__left,
 .topbar__right,
 .workspace-switcher {
-  align-items: center;
+  align-items: stretch;
+  align-self: stretch;
   display: flex;
   gap: var(--quattro-gap-inner);
   min-width: 0;
@@ -233,20 +234,20 @@ body.quattro-body input:focus-visible {
 .theme-button,
 .topbar-icon {
   align-items: center;
+  align-self: stretch;
   background: transparent;
   border: none;
   border-radius: 0;
   cursor: pointer;
   display: inline-flex;
   gap: var(--quattro-gap-inner);
-  height: 100%;
+  height: auto;
   justify-content: center;
   line-height: 1;
   min-width: 34px;
   padding: 0 12px;
   transition:
     background-color 140ms ease,
-    border-color 140ms ease,
     color 140ms ease
   ;
 }
@@ -350,9 +351,9 @@ body.quattro-body input:focus-visible {
   bottom: 0;
   content: '';
   height: 2px;
-  left: 2px;
+  left: 0;
   position: absolute;
-  right: 2px;
+  right: 0;
 }
 
 .workspace-button.is-active .workspace-button__number {
