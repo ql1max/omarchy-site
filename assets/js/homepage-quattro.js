@@ -1,5 +1,3 @@
-import * as logo from './modules/logo.js';
-
 const WORKSPACES = Object.freeze({
   '1': { name: 'Welcome', slug: 'welcome' },
   '2': { name: 'Watch', slug: 'watch' },
@@ -453,16 +451,6 @@ function initHomepage() {
   });
 
   activateWorkspace(workspaceFromHash(window.location.hash), { announce: false });
-
-  // Defer the logo animation one idle frame past first paint so its WASM
-  // fetch never races the initial render or nudges the browser into showing
-  // a progress indicator on load.
-  const startLogo = () => logo.ready();
-  if (typeof window.requestIdleCallback === 'function') {
-    window.requestIdleCallback(startLogo, { timeout: 1500 });
-  } else {
-    window.setTimeout(startLogo, 200);
-  }
 }
 
 if (document.readyState === 'loading') {
