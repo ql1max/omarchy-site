@@ -21,7 +21,8 @@ html {
 }
 
 body.quattro-body {
-  background-color: var(--color-background-night);
+  /* The fixed ::before layer paints the wallpaper and base color; body must
+     stay transparent or its own background covers the layer entirely. */
   color: var(--color-terminal-white);
   display: block;
   font-family: 'JetBrains Mono', monospace;
