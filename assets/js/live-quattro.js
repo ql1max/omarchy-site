@@ -344,7 +344,7 @@ function initWindows() {
       handle.setPointerCapture(event.pointerId);
       const move = (moveEvent) => {
         const x = Math.min(window.innerWidth - rect.width, Math.max(0, startLeft + moveEvent.clientX - startX));
-        const y = Math.min(window.innerHeight - rect.height - 30, Math.max(30, startTop + moveEvent.clientY - startY));
+        const y = Math.min(window.innerHeight - rect.height - 36, Math.max(30, startTop + moveEvent.clientY - startY));
         windowElement.style.left = `${x}px`;
         windowElement.style.top = `${y}px`;
       };
