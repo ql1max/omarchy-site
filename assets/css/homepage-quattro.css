@@ -282,10 +282,6 @@ body.quattro-body input:focus-visible {
   background: rgba(var(--rgb-terminal-white), 0.1);
 }
 
-.workspace-button.is-active {
-  background: rgba(var(--rgb-terminal-white), 0.16);
-}
-
 .dialog-close:hover,
 .dialog-close:focus-visible {
   background: var(--quattro-fill-hover);
@@ -344,7 +340,7 @@ body.quattro-body input:focus-visible {
 }
 
 .workspace-button.is-active {
-  background: rgba(var(--rgb-terminal-white), 0.18);
+  background: rgba(var(--rgb-terminal-white), 0.16);
   color: var(--color-terminal-white);
   position: relative;
 }
