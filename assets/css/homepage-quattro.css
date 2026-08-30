@@ -190,10 +190,13 @@ body.quattro-body input:focus-visible {
   gap: var(--quattro-gap-inner);
   height: var(--quattro-bar-height);
   justify-content: space-between;
+  margin-inline: auto;
+  max-width: 1480px;
   min-height: var(--quattro-bar-height);
   padding: 0 var(--quattro-gap-inner);
   position: sticky;
   top: var(--quattro-gap-outer);
+  width: 100%;
   z-index: 20;
 }
 
@@ -315,15 +318,13 @@ body.quattro-body input:focus-visible {
 }
 
 .workspace-button.is-active {
-  background:
-    linear-gradient(rgba(var(--rgb-background-night), 0.9), rgba(var(--rgb-background-night), 0.9)) padding-box,
-    linear-gradient(120deg, var(--color-terminal-cyan), var(--color-green), var(--quattro-purple)) border-box;
-  border: 2px solid transparent;
-  color: var(--color-white);
+  background: var(--color-terminal-cyan);
+  border-color: var(--color-terminal-cyan);
+  color: var(--color-background-night) !important;
 }
 
 .workspace-button.is-active .workspace-button__number {
-  color: var(--color-green);
+  color: var(--color-background-night);
 }
 
 .topbar__product {
@@ -666,18 +667,16 @@ body.js-ready .workspace:not(.is-active) {
 }
 
 .action--primary {
-  background:
-    linear-gradient(rgba(var(--rgb-background-night), 0.9), rgba(var(--rgb-background-night), 0.9)) padding-box,
-    linear-gradient(120deg, var(--color-terminal-cyan), var(--color-green), var(--quattro-purple)) border-box;
-  border: 2px solid transparent;
-  color: var(--color-white) !important;
+  background: var(--color-terminal-cyan);
+  border: 2px solid var(--color-terminal-cyan);
+  color: var(--color-background-night) !important;
 }
 
 .action--primary:hover,
 .action--primary:focus-visible {
-  background:
-    linear-gradient(var(--quattro-fill-hover), var(--quattro-fill-hover)) padding-box,
-    linear-gradient(120deg, var(--color-terminal-cyan), var(--color-green), var(--quattro-purple)) border-box;
+  background: var(--color-green);
+  border-color: var(--color-green);
+  color: var(--color-background-night) !important;
 }
 
 .terminal-window__footer {
