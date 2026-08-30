@@ -1299,7 +1299,7 @@ body.quattro-body kbd {
 }
 
 /* -------------------------------------------------------------------------- */
-/* Animated Omarchy wordmark                                                   */
+/* Omarchy wordmark (official brand asset)                                     */
 /* -------------------------------------------------------------------------- */
 
 .pre.quattro-logo {
@@ -1307,11 +1307,16 @@ body.quattro-body kbd {
   border: 1px solid rgba(var(--rgb-terminal-white), 0.28);
   margin: 0 0 var(--quattro-gap-outer);
   overflow: hidden;
-  padding: var(--quattro-gap-outer);
+  padding: var(--quattro-gap-outer) calc(var(--quattro-gap-outer) * 2);
 }
 
-.quattro-logo pre {
-  font-size: clamp(5.5px, 1vw, 14px);
+.quattro-logo__mark {
+  display: block;
+  filter: drop-shadow(0 1px 8px rgba(var(--rgb-black), 0.35));
+  height: auto;
+  margin-inline: auto;
+  max-width: 100%;
+  width: clamp(220px, 42vw, 560px);
 }
 
 /* -------------------------------------------------------------------------- */
